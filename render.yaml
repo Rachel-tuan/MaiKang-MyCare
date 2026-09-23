@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: maikang-mycare
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: node start-production.mjs
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: DEEPSEEK_API_KEY
+        sync: false  # 在 Render 控制台手动填入
+      - key: ALLOW_MOCK_FALLBACK
+        value: "true"
+      - key: PORT
+        value: 10000  # Render 会自动覆盖，但写上保险
