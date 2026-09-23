@@ -1,0 +1,66 @@
+# 依赖
+node_modules/
+dist/
+
+# 环境变量（含密钥，切勿提交）
+.env
+.env.local
+.env.*.local
+# 兼容漏写前导点的情况，避免密钥文件被误提交
+env.local
+env.*.local
+
+# 打包与生成物
+*.zip
+ppt/
+
+# 日志
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# 编辑器与系统文件
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 本地协作工具工作目录（与项目运行无关）
+.workbuddy/
+.wbapp_*.genie
+
+# 缓存与临时目录
+.cache/
+.slidep/
+logs/
+.deploy/
+
+# 备份文件
+*.bak
+*.bak-*
+README_back.md
+*_back.docx
+
+# 数据目录：只保留种子脚本，不提交运行时产物
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+data/_*.json
+data/_*.mjs
+data/step*-record.json
+
+# 数据库：只提交主库，副本库与验收产物均可由脚本重建
+data/*-verify-record.json
+data/*.demo.json
+data/mycare-demo.db
+data/_*.db
+data/*.db-wal
+data/*.db-shm
+
+# 一次性脚本与探针（下划线前缀 = 非交付物）
+scripts/_*.mjs
+scripts/db/_*.mjs
+
+# 临时探测输出
+_bat-probe.txt

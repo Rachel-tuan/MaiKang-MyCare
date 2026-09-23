@@ -1,0 +1,75 @@
+<Slide style={{ width: 1280, height: 720, background: '#F7F9FC', flexDirection: 'column' }}>
+  {/* 页眉 A3 */}
+  <Box style={{ width: '100%', height: 80, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', padding: '0 40px', gap: 16 }}>
+    <Box style={{ width: 6, height: 36, background: '#FFC107' }} />
+    <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#FFFFFF' }}>四级预警等级与唯一裁定链</Text>
+    <Text style={{ fontSize: 17, color: '#C9D8F0', marginLeft: 18 }}>产品等级 ≠ 医学危险分层</Text>
+  </Box>
+  {/* 内容区 */}
+  <Box style={{ height: 580, flexDirection: 'row', padding: '20px 40px', gap: 24 }}>
+    {/* 左：四级产品词表 */}
+    <Box style={{ width: 400, flexDirection: 'column', gap: 12 }}>
+      <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>四级产品词表</Text>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 18px', flex: 1, justifyContent: 'center' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+          <Box style={{ background: '#E8EFF8', borderRadius: 14, padding: '4px 16px' }}><Text style={{ fontSize: 17, fontWeight: 'bold', color: '#1E4FA8' }}>提示</Text></Box>
+          <Text style={{ fontSize: 15, color: '#4A5568' }}>单次轻微异常 · 不落库</Text>
+        </Box>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 18px', flex: 1, justifyContent: 'center' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+          <Box style={{ background: '#3D7BD9', borderRadius: 14, padding: '4px 16px' }}><Text style={{ fontSize: 17, fontWeight: 'bold', color: '#FFFFFF' }}>关注</Text></Box>
+          <Text style={{ fontSize: 15, color: '#4A5568' }}>出现波动或反复 · 落库</Text>
+        </Box>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 18px', flex: 1, justifyContent: 'center' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+          <Box style={{ background: '#1E4FA8', borderRadius: 14, padding: '4px 16px' }}><Text style={{ fontSize: 17, fontWeight: 'bold', color: '#FFFFFF' }}>预警</Text></Box>
+          <Text style={{ fontSize: 15, color: '#4A5568' }}>连续异常趋势 · 落库</Text>
+        </Box>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 18px', flex: 1, justifyContent: 'center' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+          <Box style={{ background: '#D9534F', borderRadius: 14, padding: '4px 16px' }}><Text style={{ fontSize: 17, fontWeight: 'bold', color: '#FFFFFF' }}>紧急</Text></Box>
+          <Text style={{ fontSize: 15, color: '#4A5568' }}>严重超标或急性症状 · 落库</Text>
+        </Box>
+      </Box>
+      <Box style={{ background: '#E8EFF8', borderRadius: 10, padding: '12px 18px' }}>
+        <Text style={{ fontSize: 15, color: '#0E3F8C', lineHeight: 1.5 }}>工具层 assessRisk() 只转述：risks[] 等级取自命中项，observations[] 纯描述</Text>
+      </Box>
+    </Box>
+    {/* 右：真实医生端截图 + SVG 裁定链 */}
+    <Box style={{ flex: 1, flexDirection: 'column', gap: 12 }}>
+      <Image src="assets/doctor.png" style={{ width: 776, height: 300, objectFit: 'cover', objectPosition: 'top', borderRadius: 12, border: '1px solid #D6DCE5' }} />
+      <Text style={{ fontSize: 14, color: '#8B97A8' }}>▲ 医生工作台：患者预警 / 良好状态徽标来自同一裁定链（真实界面）</Text>
+      <svg width={776} height={190} viewBox='0 0 776 190'>
+        <rect x='8' y='55' width='230' height='80' rx='10' fill='#0E3F8C' />
+        <text x='123' y='88' fontSize='16' fontWeight='bold' fill='#FFFFFF' textAnchor='middle'>clinicalRules</text>
+        <text x='123' y='112' fontSize='14' fill='#C9D8F0' textAnchor='middle'>evaluateClinicalRules()</text>
+        <rect x='292' y='55' width='150' height='80' rx='10' fill='#1E4FA8' />
+        <text x='367' y='88' fontSize='15' fontWeight='bold' fill='#FFFFFF' textAnchor='middle'>triggered</text>
+        <text x='367' y='112' fontSize='14' fill='#D8E4F6' textAnchor='middle'>highestLevel</text>
+        <path d='M238 95 L292 95' stroke='#1E4FA8' strokeWidth='3' />
+        <path d='M282 87 L296 95 L282 103 Z' fill='#1E4FA8' />
+        {/* 三路 */}
+        <path d='M442 95 L502 40' stroke='#3D7BD9' strokeWidth='2.5' />
+        <path d='M442 95 L502 95' stroke='#3D7BD9' strokeWidth='2.5' />
+        <path d='M442 95 L502 150' stroke='#3D7BD9' strokeWidth='2.5' />
+        <rect x='508' y='18' width='260' height='46' rx='8' fill='#F0F5FC' stroke='#3D7BD9' strokeWidth='1.5' />
+        <text x='638' y='47' fontSize='15' fill='#0E3F8C' textAnchor='middle' fontWeight='bold'>晨报 briefing.risk</text>
+        <rect x='508' y='72' width='260' height='46' rx='8' fill='#F0F5FC' stroke='#3D7BD9' strokeWidth='1.5' />
+        <text x='638' y='101' fontSize='15' fill='#0E3F8C' textAnchor='middle' fontWeight='bold'>alerts 落库（关注及以上）</text>
+        <rect x='508' y='126' width='260' height='46' rx='8' fill='#F0F5FC' stroke='#3D7BD9' strokeWidth='1.5' />
+        <text x='638' y='155' fontSize='15' fill='#0E3F8C' textAnchor='middle' fontWeight='bold'>医生端 evaluation.highestLevel</text>
+      </svg>
+      <Text style={{ fontSize: 15, color: '#D9534F', fontWeight: 600 }}>
+        D-2 修复：修复前工具层自带第二套阈值，4 例中 3 例不一致；修复后三级同源，4 患者 4/4 一致
+      </Text>
+    </Box>
+  </Box>
+  {/* 页脚 */}
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>迈康 MyCare · 老年慢病多智能体协同健康管理平台</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>09 / 15</Text>
+  </Box>
+</Slide>

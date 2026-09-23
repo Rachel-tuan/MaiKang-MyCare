@@ -1,0 +1,33 @@
+# 统一换行符，避免跨平台协作时把 Windows 批处理的 CRLF 改成 LF
+# （*.bat 若变成 LF，在 cmd 下会出现「双击无反应 / 一闪而过」）
+
+* text=auto
+
+# Windows 脚本必须保持 CRLF
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+*.ps1  text eol=crlf
+
+# 源码与文本统一 LF
+*.js   text eol=lf
+*.jsx  text eol=lf
+*.mjs  text eol=lf
+*.json text eol=lf
+*.css  text eol=lf
+*.html text eol=lf
+*.md   text eol=lf
+*.sql  text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# 二进制文件不做换行转换
+*.db    binary
+*.sqlite binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
+*.zip   binary
+*.mp4   binary

@@ -1,0 +1,51 @@
+<Slide style={{ width: 1280, height: 720, background: '#F7F9FC', flexDirection: 'column' }}>
+  {/* 页眉 A3 */}
+  <Box style={{ width: '100%', height: 80, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', padding: '0 40px', gap: 16 }}>
+    <Box style={{ width: 6, height: 36, background: '#FFC107' }} />
+    <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#FFFFFF' }}>技术栈与六智能体架构</Text>
+    <Text style={{ fontSize: 17, color: '#C9D8F0', marginLeft: 18 }}>前后端同源 · 同一把尺子</Text>
+  </Box>
+  {/* 内容区 */}
+  <Box style={{ height: 580, flexDirection: 'row', padding: '24px 40px', gap: 24 }}>
+    {/* 宽栏：智能体中心真实截图 + 契约说明 */}
+    <Box style={{ flex: 1, flexDirection: 'column', gap: 14 }}>
+      <Image src="assets/agents.png" style={{ width: 700, height: 394, objectFit: 'cover', borderRadius: 12, border: '1px solid #D6DCE5' }} />
+      <Text style={{ fontSize: 14, color: '#8B97A8' }}>▲ 智能体中心：体征分析 → 风险预警 → 方案规划 → 汇总编排（真实运行界面）</Text>
+      <Box style={{ background: '#E8EFF8', borderRadius: 10, padding: '14px 20px' }}>
+        <Text style={{ fontSize: 17, color: '#0E3F8C', fontWeight: 600, lineHeight: 1.6 }}>
+          五个共用契约文件：clinicalRules.js · dailyTasks.js · taskOverride.js · healthScore.js · aiScore.js
+          —— 前后端同时 import，判定口径天然一致
+        </Text>
+      </Box>
+    </Box>
+    {/* 窄栏：技术栈清单 */}
+    <Box style={{ width: 420, flexDirection: 'column', gap: 12 }}>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '14px 20px', flexDirection: 'column', gap: 4 }}>
+        <Text style={{ fontSize: 15, color: '#8B97A8' }}>前端 / 后端</Text>
+        <Text style={{ fontSize: 19, fontWeight: 600, color: '#1A2230', lineHeight: 1.5 }}>React 18 · Vite 5 · Ant Design 5<br />Node.js 22（Express · ESM）· 31 条路由</Text>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '14px 20px', flexDirection: 'column', gap: 4 }}>
+        <Text style={{ fontSize: 15, color: '#8B97A8' }}>数据库</Text>
+        <Text style={{ fontSize: 19, fontWeight: 600, color: '#1A2230' }}>node:sqlite 内置模块 · 22 张表</Text>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '14px 20px', flexDirection: 'column', gap: 4 }}>
+        <Text style={{ fontSize: 15, color: '#8B97A8' }}>对话模型</Text>
+        <Text style={{ fontSize: 19, fontWeight: 600, color: '#1A2230' }}>DeepSeek <span style={{ color: '#1E4FA8' }}>deepseek-flash</span>（OpenAI 兼容接口）</Text>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '14px 20px', flexDirection: 'column', gap: 4 }}>
+        <Text style={{ fontSize: 15, color: '#8B97A8' }}>视觉模型</Text>
+        <Text style={{ fontSize: 19, fontWeight: 600, color: '#1A2230' }}>通义千问 <span style={{ color: '#1E4FA8' }}>qwen3.8-max</span> + Tesseract OCR 兜底</Text>
+      </Box>
+      <Box style={{ background: '#0E3F8C', borderRadius: 10, padding: '14px 20px', flex: 1, justifyContent: 'center' }}>
+        <Text style={{ fontSize: 16, color: '#FFFFFF', fontWeight: 600, lineHeight: 1.5 }}>
+          六个智能体：健康管家（编排）· 体征分析 · 风险预警 · 方案规划 · 多模态识别 · 情感陪伴
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+  {/* 页脚 */}
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>迈康 MyCare · 老年慢病多智能体协同健康管理平台</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>05 / 15</Text>
+  </Box>
+</Slide>

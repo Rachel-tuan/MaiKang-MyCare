@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>迈康 MyCare · 系统说明书（最终版）</title>
+<style>
+  :root{
+    --bg:#f5f7fb; --card:#ffffff; --ink:#16202e; --ink2:#3d4c63; --muted:#6b7c96;
+    --line:#e3e9f2; --line2:#eef2f8;
+    --blue:#1f6feb; --blue-bg:#eaf1fe;
+    --green:#0f9d58; --green-bg:#e8f7ef;
+    --amber:#c77700; --amber-bg:#fff6e5;
+    --orange:#e2621b; --orange-bg:#fff0e6;
+    --red:#d92c2c; --red-bg:#fdecec;
+    --violet:#6d3bd6; --violet-bg:#f1ebfe;
+    --radius:12px;
+    --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:15px; line-height:1.75; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--blue); text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ---------- 布局 ---------- */
+  .wrap{display:flex; align-items:flex-start; max-width:1400px; margin:0 auto}
+  .toc{
+    position:sticky; top:0; flex:0 0 268px; height:100vh; overflow-y:auto;
+    background:#fff; border-right:1px solid var(--line); padding:22px 14px 40px;
+  }
+  .toc h2{font-size:12px; letter-spacing:.12em; color:var(--muted); margin:0 0 12px 10px; font-weight:600}
+  .toc ol{list-style:none; margin:0; padding:0; counter-reset:t}
+  .toc li{counter-increment:t}
+  .toc a{
+    display:block; padding:6px 10px; border-radius:8px; color:var(--ink2);
+    font-size:13.5px; line-height:1.45; border-left:3px solid transparent;
+  }
+  .toc a::before{content:counter(t) ". "; color:var(--muted); font-variant-numeric:tabular-nums}
+  .toc a:hover{background:var(--line2); text-decoration:none}
+  .toc a.on{background:var(--blue-bg); color:var(--blue); border-left-color:var(--blue); font-weight:600}
+  main{flex:1 1 auto; min-width:0; padding:34px 42px 90px}
+
+  /* ---------- 标题 ---------- */
+  .hero{
+    background:linear-gradient(135deg,#1b3a6b 0%,#2b6cb0 55%,#2f855a 100%);
+    color:#fff; border-radius:16px; padding:30px 34px; margin-bottom:30px;
+    box-shadow:0 10px 28px rgba(27,58,107,.18);
+  }
+  .hero h1{margin:0 0 6px; font-size:27px; letter-spacing:.4px}
+  .hero .sub{opacity:.92; font-size:14.5px}
+  .hero .meta{margin-top:16px; display:flex; flex-wrap:wrap; gap:10px}
+  .hero .meta span{
+    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28);
+    padding:4px 11px; border-radius:999px; font-size:12.5px;
+  }
+
+  h2.sec{
+    font-size:20px; margin:44px 0 16px; padding-left:14px; position:relative; letter-spacing:.2px;
+  }
+  h2.sec::before{
+    content:""; position:absolute; left:0; top:6px; bottom:6px; width:5px;
+    border-radius:3px; background:linear-gradient(180deg,var(--blue),#2f855a);
+  }
+  h2.sec .n{
+    display:inline-block; min-width:26px; color:var(--muted); font-size:14px;
+    font-variant-numeric:tabular-nums; font-weight:600;
+  }
+  h3{font-size:15.5px; margin:26px 0 10px; color:var(--ink)}
+  h4{font-size:14px; margin:18px 0 8px; color:var(--ink2)}
+
+  /* ---------- 卡片 ---------- */
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px 22px; margin-bottom:16px; box-shadow:0 1px 2px rgba(22,32,46,.04);
+  }
+  .card>*:first-child{margin-top:0}
+  .card>*:last-child{margin-bottom:0}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:14px}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px}
+
+  /* ---------- 表格 ---------- */
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0}
+  th,td{padding:9px 11px; text-align:left; border-bottom:1px solid var(--line2); vertical-align:top}
+  thead th{
+    background:#f8fafd; color:var(--ink2); font-weight:600; font-size:12.5px;
+    letter-spacing:.03em; border-bottom:1px solid var(--line); white-space:nowrap;
+  }
+  tbody tr:hover{background:#fbfcfe}
+  td code,th code,p code,li code{font-family:var(--mono); font-size:12.5px; background:#f2f5fa; padding:1px 5px; border-radius:4px; color:#24405f}
+  .num{font-variant-numeric:tabular-nums; white-space:nowrap}
+  .center{text-align:center}
+
+  /* ---------- 标签 ---------- */
+  .badge{
+    display:inline-block; padding:2px 9px; border-radius:999px; font-size:12px;
+    font-weight:600; white-space:nowrap; line-height:1.7;
+  }
+  .b-info{background:var(--blue-bg); color:var(--blue)}
+  .b-watch{background:var(--amber-bg); color:var(--amber)}
+  .b-alert{background:var(--orange-bg); color:var(--orange)}
+  .b-emergency{background:var(--red-bg); color:var(--red)}
+  .b-ok{background:var(--green-bg); color:var(--green)}
+  .b-no{background:var(--red-bg); color:var(--red)}
+  .b-todo{background:var(--violet-bg); color:var(--violet)}
+  .b-gray{background:#eef1f6; color:var(--muted)}
+
+  /* ---------- 提示块 ---------- */
+  .note{
+    border-left:4px solid var(--blue); background:var(--blue-bg);
+    padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0; font-size:13.5px;
+  }
+  .note.ok{border-color:var(--green); background:var(--green-bg)}
+  .note.warn{border-color:var(--amber); background:var(--amber-bg)}
+  .note.danger{border-color:var(--red); background:var(--red-bg)}
+  .note b{color:inherit}
+
+  ul.tight{margin:8px 0; padding-left:20px}
+  ul.tight li{margin:5px 0}
+
+  /* ---------- 规则筛选器 ---------- */
+  .filters{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:12px 0}
+  .filters input{
+    flex:1 1 220px; min-width:180px; padding:8px 12px; font-size:13.5px;
+    border:1px solid var(--line); border-radius:8px; background:#fff; color:var(--ink);
+  }
+  .filters input:focus{outline:2px solid var(--blue-bg); border-color:var(--blue)}
+  .chip{
+    padding:6px 13px; border-radius:999px; border:1px solid var(--line); background:#fff;
+    font-size:13px; cursor:pointer; color:var(--ink2); user-select:none;
+  }
+  .chip:hover{border-color:var(--blue); color:var(--blue)}
+  .chip.on{background:var(--blue); border-color:var(--blue); color:#fff; font-weight:600}
+  .count{font-size:12.5px; color:var(--muted); margin-left:auto}
+
+  /* ---------- 其他 ---------- */
+  .kpi{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:14px 0}
+  .kpi div{
+    background:#f8fafd; border:1px solid var(--line); border-radius:10px; padding:13px 15px;
+  }
+  .kpi b{display:block; font-size:22px; line-height:1.3; color:var(--blue); font-variant-numeric:tabular-nums}
+  .kpi span{font-size:12.5px; color:var(--muted)}
+  .flow{
+    font-family:var(--mono); font-size:12.5px; background:#f8fafd; border:1px dashed var(--line);
+    border-radius:10px; padding:14px 16px; white-space:pre; overflow-x:auto; color:#24405f; line-height:1.75;
+  }
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  @media (max-width:1100px){ .two{grid-template-columns:1fr} }
+  details{border:1px solid var(--line); border-radius:10px; padding:10px 14px; margin:10px 0; background:#fbfcfe}
+  details summary{cursor:pointer; font-weight:600; font-size:13.5px; color:var(--ink2)}
+  details[open] summary{margin-bottom:8px}
+  footer{margin-top:50px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:12.5px}
+
+  @media print{
+    body{background:#fff; font-size:12px}
+    .toc{display:none}
+    main{padding:0}
+    .card,.hero{box-shadow:none; break-inside:avoid}
+    h2.sec{break-before:page}
+    h2.sec:first-of-type{break-before:auto}
+  }
+  @media (max-width:820px){
+    .wrap{display:block}
+    .toc{position:static; height:auto; border-right:0; border-bottom:1px solid var(--line)}
+    main{padding:20px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <h2>目 录</h2>
+  <ol id="tocList">
+    <li><a href="#s1">项目定位与要解决的问题</a></li>
+    <li><a href="#s2">演示身份：三位示范病例</a></li>
+    <li><a href="#s3">注册用户从 0 到 1：数据落在哪里</a></li>
+    <li><a href="#s4">技术栈与系统架构</a></li>
+    <li><a href="#s5">数据分层：事实层 / 兼容层 / 派生层</a></li>
+    <li><a href="#s6">数据库 22 张表清单</a></li>
+    <li><a href="#s7">确定性规则引擎：13 条规则目录</a></li>
+    <li><a href="#s8">血压规则阈值明细</a></li>
+    <li><a href="#s9">血糖规则阈值明细</a></li>
+    <li><a href="#s10">体重与行为规则阈值明细</a></li>
+    <li><a href="#s11">产品预警等级与唯一裁定链</a></li>
+    <li><a href="#s12">当日健康评分（Rule Score）</a></li>
+    <li><a href="#s13">AI 参与评分：两层评分与六条硬约束</a></li>
+    <li><a href="#s14">今日任务：生成规则与频次</a></li>
+    <li><a href="#s15">医生调整今日任务：覆盖契约</a></li>
+    <li><a href="#s16">对话提案 → 医生审核联动</a></li>
+    <li><a href="#s17">AI 权限边界与数据写入面</a></li>
+    <li><a href="#s18">接口一览（31 条）</a></li>
+    <li><a href="#s19">系统边界：能做到 / 不能做到</a></li>
+    <li><a href="#s20">当前版本限制与后续方向</a></li>
+    <li><a href="#s21">验收证据：20 个脚本 612 / 625</a></li>
+    <li><a href="#s22">十条真实性保证</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<div class="hero">
+  <h1>迈康 MyCare · 系统说明书</h1>
+  <div class="sub">老年慢病多智能体协同健康管理平台 · 最终版（注册用户 0 → 1 · 六智能体协同）</div>
+  <div class="meta">
+    <span>React 18 + Vite 5 + antd 5</span>
+    <span>Node 22 内置 node:sqlite</span>
+    <span>22 张表 · 35 条 API</span>
+    <span>13 条确定性规则 · 6 个智能体</span>
+    <span>20 个验收脚本 · 612 / 625 断言</span>
+  </div>
+</div>
+
+<!-- ============ 1 ============ -->
+<h2 class="sec" id="s1"><span class="n">1</span> 项目定位与要解决的问题</h2>
+<div class="card">
+  <p><b>一句话定位</b>：为老年慢病患者提供一个「<b>能记录、能判定、能解释、能被医生调整</b>」的日常健康管理工具。系统的核心不是"AI 聊天"，而是<b>把医学判定交给确定性规则、把表达交给模型</b>。</p>
+
+  <h3>要解决的核心问题</h3>
+  <table>
+    <thead><tr><th style="width:26%">问题</th><th>本系统的应对</th></tr></thead>
+    <tbody>
+      <tr><td>老人看不懂指标数字</td><td>用「提示 / 关注 / 预警 / 紧急」四级产品词表表达，配可执行动作，不用「高危 / 中危」等专业分层术语</td></tr>
+      <tr><td>AI 直接给医学结论不可信</td><td>规则判定完全由 <code>clinicalRules.js</code> 计算，模型只负责把结果转成自然语言，<b>不得自定阈值或等级</b></td></tr>
+      <tr><td>一天多次测量容易被"覆盖"</td><td>事实层「一次测量一条、纯追加、永不覆盖」，作废只打 <code>record_status='void'</code></td></tr>
+      <tr><td>AI 建议没人把关</td><td>患者对话产生的任务调整一律进入 <code>pending</code>，<b>医生审结后才生效</b></td></tr>
+      <tr><td>AI 评分不可解释</td><td>评分分两层：规则分（官方）、AI 辅助分（仅同屏参考，不参与任何分级）；<b>模型只提意见，不是分数、不构成一层</b></td></tr>
+    </tbody>
+  </table>
+
+  <div class="note"><b>设计主线</b>：事实层与规则层分离 —— 数据只描述「发生了什么」，规则只回答「这意味着什么」，模型只负责「怎么说给人听」。</div>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2 class="sec" id="s2"><span class="n">2</span> 演示身份：三位示范病例</h2>
+<div class="card">
+  <p>登录页提供「一键进入示范病例」，三位内置患者<b>免注册、免密码</b>。除示范病例外的账号必须<b>先注册才能登录</b>。</p>
+  <table>
+    <thead><tr><th>ID</th><th>姓名</th><th>性别 / 年龄</th><th>主诊断</th><th>合并症</th><th>个体化演示阈值</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>patient_1</code></td><td>张建国</td><td>男 / 68</td>
+        <td>原发性高血压</td><td>超重 · 中心性肥胖</td>
+        <td class="num">血压 &lt; 140/90 mmHg</td>
+      </tr>
+      <tr>
+        <td><code>patient_2</code></td><td>李秀英</td><td>女 / 65</td>
+        <td>2 型糖尿病</td><td>超重 · 血脂异常</td>
+        <td class="num">空腹 5.0–7.8 mmol/L · HbA1c 7.0–7.5%</td>
+      </tr>
+      <tr>
+        <td><code>patient_3</code></td><td>王建军</td><td>男 / 62</td>
+        <td>肥胖症</td><td>代谢综合征 · 空腹血糖受损</td>
+        <td class="num">BMI ≥ 28.0 · 腰围 ≥ 90 cm</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note warn"><b>口径提醒</b>：上表的「个体化演示阈值」是<b>演示设定值</b>，用于让三位病例的判定结果各自落在不同等级上；它们<b>不是诊断标准</b>，也不得对外表述为"来自某部指南"。</div>
+
+  <h3>医生端</h3>
+  <p>固定签名「<b>李医生 · 主任医师 · 全科</b>」，不出现患者姓名。新注册患者自动纳入 <code>doc_li</code> 名下，医生端随库出现。</p>
+  <p>除三位示范病例，系统还有一位真实注册账号 <code>patient_4</code>「赵小川」，用于验证"注册 → 落库 → 医生端可见"的闭环。</p>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2 class="sec" id="s3"><span class="n">3</span> 注册用户从 0 到 1：数据落在哪里</h2>
+<div class="card">
+  <p>登录页除三位示范病例外，其余账号一律<b>先注册 → 再登录 → 再建档</b>。这一节说明三件事：用户自己填的数据<b>落在哪张表</b>、<b>分布在哪些文件</b>、以及它与示范病例如何走<b>同一条</b>任务派生与医生审核链路。</p>
+
+  <h3>3.1 完整链路（七步）</h3>
+  <table>
+    <thead><tr><th style="width:5%">#</th><th style="width:15%">步骤</th><th style="width:32%">入口 / 接口</th><th>落点与结果</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="num">1</td><td>注册</td>
+        <td>登录页「注册」页签 → <code>POST /api/patients/register</code></td>
+        <td>写入 <code>patients</code> 一行：<code>patient_id</code>（自动分配）、<code>username</code>、<code>password_hash</code>（scrypt）、<code>birth_date</code>。<b>注册后不自动登录</b>，切回登录页并回填用户名</td>
+      </tr>
+      <tr>
+        <td class="num">2</td><td>登录</td>
+        <td>登录页 → <code>POST /api/patients/login</code></td>
+        <td>校验 scrypt 哈希后返回 <code>patientId</code> 与档案视图；查不到即 <code>404 E_PATIENT_NOT_FOUND</code>，<b>绝不回落到示范患者</b></td>
+      </tr>
+      <tr>
+        <td class="num">3</td><td>建档引导</td>
+        <td>首页自动弹出「完善健康档案」</td>
+        <td>触发条件：<b>没有紧急联系人，或没有生活画像</b>。同一会话只弹一次，也可在「我的」页手动重开</td>
+      </tr>
+      <tr>
+        <td class="num">4</td><td>填写并提交</td>
+        <td><code>PUT /api/patients/:patientId/profile</code></td>
+        <td>六类档案一次提交、<b>单事务内落库</b>（明细见 3.2）。原则是<b>有行则 UPDATE、无行才 INSERT</b></td>
+      </tr>
+      <tr>
+        <td class="num">5</td><td>今日任务派生</td>
+        <td><code>GET /api/patients/:patientId/daily-tasks</code></td>
+        <td>按疾病谱<b>实时派生</b>：高血压 → 血压监测，糖尿病 → 血糖监测，全员 → 运动/步数，有药 → 服药。<b>任务本身不落库</b></td>
+      </tr>
+      <tr>
+        <td class="num">6</td><td>每天记录</td>
+        <td>首页「今日任务」→ <code>/data-record?focus=字段</code>；服药为原地打卡</td>
+        <td>一次测量进<b>事实层</b>（分钟粒度、纯追加、永不覆盖）；日汇总进<b>兼容层</b> <code>daily_health_records</code></td>
+      </tr>
+      <tr>
+        <td class="num">7</td><td>授权 → 提案 → 审结</td>
+        <td>「我的医疗团队」授权；智能体对话产出提案；医生端审结</td>
+        <td>授权前医生端<b>看不到</b>该患者；提案只写 <code>is_active = 0</code>，<b>审结前患者端逐字节不变</b>，审结后今日任务真实变化</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>3.2 用户填的六类档案 → 落在哪张表</h3>
+  <table>
+    <thead><tr><th style="width:13%">档案类别</th><th style="width:20%">落库表</th><th style="width:31%">关键列</th><th>写入策略</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>基础信息</td><td><code>patients</code></td>
+        <td><code>name</code> · <code>gender</code> · <code>birth_date</code> · <code>height</code> · <code>phone</code> · <code>occupation</code> · <code>elderly_mode</code> · <code>voice_enabled</code></td>
+        <td>UPDATE 单行；身高限 <b>1–250 cm</b>，越界返回 400 而非静默接受</td>
+      </tr>
+      <tr>
+        <td>紧急联系人</td><td><code>patient_contacts</code></td>
+        <td><code>contact_name</code> · <code>relation</code> · <code>contact_phone</code> · <code>authorized</code></td>
+        <td>取最早一行 UPDATE，无行才 INSERT；<code>authorized_at</code> 只在首次授权时写入</td>
+      </tr>
+      <tr>
+        <td>疾病诊断</td><td><code>patient_conditions</code></td>
+        <td><code>disease_name</code> · <code>is_primary</code> · <code>disease_grade</code> · <code>duration_text</code> · <code>risk_stratification</code> · <code>comorbidities</code></td>
+        <td>按病名匹配 UPDATE；<b>主诊断唯一</b>（先全部置 0，再把首项置 1）</td>
+      </tr>
+      <tr>
+        <td>生活画像</td><td><code>patient_lifestyle</code></td>
+        <td><code>diet</code> · <code>exercise</code> · <code>sleep</code> · <code>biggest_difficulty</code> · <code>motivation</code> · <code>ai_style</code></td>
+        <td>每列 <code>COALESCE(新值, 原值)</code>，<b>只更新本次真正传上来的字段</b></td>
+      </tr>
+      <tr>
+        <td>控制目标</td><td><code>patient_targets</code></td>
+        <td><code>systolic_target</code> · <code>diastolic_target</code> · <code>fasting_glucose_target</code> · <code>bmi_target</code> · <code>waist_target</code> · <code>steps_target</code></td>
+        <td><b>只 UPDATE 既有行，绝不 INSERT 第二行</b>；<b>既有行的 <code>basis</code> 一个字都不改</b>（登录页把它当 JSON 读）</td>
+      </tr>
+      <tr>
+        <td>用药计划</td><td><code>medications</code></td>
+        <td><code>name</code> · <code>dosage</code> · <code>time</code> · <code>frequency</code> · <code>note</code></td>
+        <td>按药名匹配 UPDATE，无行才 INSERT；同时置 <code>is_active = 1</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note warn"><b>两条建档红线</b>：① <code>patient_targets</code> 只允许 UPDATE 既有行 —— 多出一行会让「取最新一行」的排序产生歧义；② 用户自述控制目标是<b>档案层数据</b>，<b>不改变任何医学判定阈值</b>，医生后续可在「今日任务」中调整。</div>
+
+  <h3>3.3 用户数据分布在哪些文件</h3>
+  <p>要先分清两件事：<b>运行期的数据</b>存在 SQLite 数据库文件里；<b>读写这些数据的代码</b>才是源码文件。</p>
+  <table>
+    <thead><tr><th style="width:11%">层</th><th style="width:33%">文件</th><th>职责</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3"><b>运行期数据<br>(数据库)</b></td><td><code>data/mycare.db</code></td><td><b>主库</b>。真实注册账号存在这里（含既有账号 <code>patient_4</code>）</td></tr>
+      <tr><td><code>data/mycare-demo.db</code></td><td><b>演示副本库</b>。答辩演示与写入型验收使用；重置脚本 <code>scripts/db/reset-demo.mjs</code></td></tr>
+      <tr><td><code>src/database/schema.sql</code></td><td>22 张表的<b>唯一</b>建表定义（P0 冻结，本版<b>零新增表</b>）</td></tr>
+      <tr><td rowspan="4"><b>服务端代码</b></td><td><code>server/data/patientService.js</code></td><td><b>注册 / 登录 / 建档 / 找回密码的唯一实现</b>：<code>registerPatient</code>、<code>resolvePatientForLogin</code>、<code>updatePatientProfile</code></td></tr>
+      <tr><td><code>server/data/dataProvider.js</code></td><td>档案读取与视图：<code>getPatientProfile</code>、<code>toUserProfileView</code>（界面消费的字段结构）</td></tr>
+      <tr><td><code>server/index.js</code></td><td>HTTP 路由：<code>/api/patients/register</code>、<code>/api/patients/login</code>、<code>PUT /api/patients/:patientId/profile</code></td></tr>
+      <tr><td><code>server/data/taskOverrideService.js</code></td><td>今日任务覆盖读取、待审提案计数</td></tr>
+      <tr><td rowspan="5"><b>前端代码</b></td><td><code>src/pages/LoginPage.jsx</code></td><td>注册 / 登录 / 找回密码三个页签</td></tr>
+      <tr><td><code>src/components/Patient/ProfileSetupModal.jsx</code></td><td><b>「完善健康档案」弹窗</b>：六类档案表单与提交</td></tr>
+      <tr><td><code>src/pages/HomePage.jsx</code></td><td>登录后自动弹建档引导；今日任务点击跳转记录页</td></tr>
+      <tr><td><code>src/pages/ProfilePage.jsx</code></td><td>「我的」页：编辑档案入口 + 我的医疗团队授权入口</td></tr>
+      <tr><td><code>src/services/patientApi.js</code></td><td>档案读写 API 客户端（<code>getProfile</code> / <code>updateProfile</code>）</td></tr>
+      <tr><td rowspan="2"><b>规则派生</b></td><td><code>src/utils/dailyTasks.js</code></td><td><code>buildDailyTasks()</code>：由疾病谱派生今日任务（前后端同源）</td></tr>
+      <tr><td><code>src/utils/clinicalRules.js</code></td><td>13 条确定性规则，<b>唯一裁定者</b></td></tr>
+    </tbody>
+  </table>
+
+  <h3>3.4 注册用户与示范病例的差别</h3>
+  <table>
+    <thead><tr><th style="width:20%">维度</th><th style="width:35%">三位示范病例</th><th>自助注册用户</th></tr></thead>
+    <tbody>
+      <tr><td>进入方式</td><td>登录页一键进入</td><td>必须注册后凭用户名 + 密码登录</td></tr>
+      <tr><td>档案来源</td><td>种子数据（虚构人设，含个体化演示阈值）</td><td><b>本人填写</b>，落到 3.2 的六张表</td></tr>
+      <tr><td>今日任务</td><td>按种子疾病谱派生</td><td>按<b>本人填写的</b>疾病谱派生，<b>同一条 <code>buildDailyTasks()</code></b></td></tr>
+      <tr><td>医生端可见性</td><td>种子数据中已默认授权</td><td>注册只建立<b>未授权</b>关联；<b>患者本人在「我的医疗团队」同意后</b>医生端才可见</td></tr>
+      <tr><td>智能体提案</td><td>可提案 → 医生审结后生效</td><td><b>完全一致</b>：同样产出 <code>task_proposal</code>，同样进医生端待审列表</td></tr>
+      <tr><td>规则与评分</td><td colspan="2" style="text-align:center"><b>完全同源</b> —— 同一套 <code>clinicalRules.js</code>、同一套 <code>healthScore.js</code>，不因账号来源分叉</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note ok"><b>一句话总结</b>：示范病例只是「档案已经预填好的用户」。从注册到每天记录，注册用户走的是<b>同一条代码路径</b> —— 差别只在档案由谁填写、授权由谁点开。</div>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2 class="sec" id="s4"><span class="n">4</span> 技术栈与系统架构</h2>
+<div class="card">
+  <div class="two">
+    <div>
+      <h4>技术栈</h4>
+      <table>
+        <tbody>
+          <tr><th style="width:38%">前端</th><td>React 18 · Vite 5 · antd 5 · styled-components 6</td></tr>
+          <tr><th>后端</th><td>Node.js 22（Express），ESM</td></tr>
+          <tr><th>数据库</th><td>Node 内置 <code>node:sqlite</code>（零原生依赖、零 ORM）</td></tr>
+          <tr><th>对话模型</th><td>DeepSeek V4.1 Flash（<code>deepseek-flash</code>），OpenAI 兼容接口，可用 stub 替代</td></tr>
+          <tr><th>视觉模型</th><td>通义千问 <code>qwen3.8-max</code>（OpenAI 兼容接口）+ Tesseract.js（OCR）兜底</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h4>分层结构</h4>
+      <div class="flow">浏览器（React SPA）
+   │  /api/*  → vite proxy
+   ▼
+Node 服务（server/index.js，31 条路由）
+   ├─ agents/     6 个智能体 + 编排 + 工具层
+   ├─ data/       8 个数据服务（唯一写入面）
+   └─ utils（与前端共用）：
+        clinicalRules.js  规则判定
+        dailyTasks.js     今日任务生成
+        taskOverride.js   覆盖契约
+        healthScore.js    Rule Score
+        aiScore.js        两层评分</div>
+    </div>
+  </div>
+
+  <h3>六个智能体</h3>
+  <table>
+    <thead><tr><th>ID</th><th>名称</th><th>职责</th></tr></thead>
+    <tbody>
+      <tr><td><code>steward</code></td><td>健康管家智能体</td><td>总控编排</td></tr>
+      <tr><td><code>vitals</code></td><td>体征分析智能体</td><td>环境感知 / 数据分析</td></tr>
+      <tr><td><code>sentinel</code></td><td>风险预警智能体</td><td>风险识别</td></tr>
+      <tr><td><code>planner</code></td><td>方案规划智能体</td><td>自主决策</td></tr>
+      <tr><td><code>vision</code></td><td>多模态识别智能体</td><td>多模态交互</td></tr>
+      <tr><td><code>companion</code></td><td>情感陪伴智能体</td><td>情感交互</td></tr>
+    </tbody>
+  </table>
+
+  <h3>两个协同场景</h3>
+  <p>六个智能体不是各自为政：编排器 <code>server/agents/orchestrator.js</code> 按场景决定<b>谁先谁后、谁依赖谁的输出</b>，上游结论会注入下游的上下文。</p>
+  <table>
+    <thead><tr><th style="width:19%">场景</th><th style="width:24%">接口</th><th>协同链路与产出</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>晨间简报</b><br><span style="font-size:12.5px;opacity:.72">首页自动加载</span></td>
+        <td><code>POST /api/agent/briefing</code><br><code>POST /api/agent/orchestrate</code></td>
+        <td>体征分析 → 风险预警（注入体征结论）→ 健康管家汇总，输出「今日健康简报」与不超过 3 条行动清单。本地算法通道<b>不依赖模型</b>。</td>
+      </tr>
+      <tr>
+        <td><b>健康方案协商</b><br><span style="font-size:12.5px;opacity:.72">「健康建议」页</span></td>
+        <td><code>POST /api/agent/care-plan</code></td>
+        <td>六个智能体<b>逐一产出并汇总</b>：体征分析给指标解读、多模态识别给用药解读、风险预警给产品预警等级、方案规划给运动与饮食方案、情感陪伴给坚持策略、健康管家汇总成一份成品 <code>carePlan</code>（<code>byAgent</code> 收录六份结果）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note"><b>健康建议为什么必须走协同？</b>单点问答只能回答「这个数字高不高」。协同把<b>同一份确定性判定</b>分给六个视角各表达一次 —— 指标、用药、风险、方案、陪伴、汇总 —— 页面拿到的是一份<b>结构化成品</b>，而不是六段互不相干的文字。</div>
+
+  <div class="note warn"><b>协同不改变判定</b>：六个智能体按 <code>patientId</code> 从后端自取同一份上下文，<b>不新增任何写入</b>，也不改写 <code>patient_targets</code>；等级与达标率仍由 <code>clinicalRules.js</code> 唯一裁定。</div>
+
+  <h3>五个共用契约文件（前后端同源）</h3>
+  <p><code>clinicalRules.js</code> · <code>dailyTasks.js</code> · <code>taskOverride.js</code> · <code>healthScore.js</code> · <code>aiScore.js</code> —— 这五个文件被前端与后端<b>同时 import</b>，意味着「同一把尺子」：不会出现前端算一套、后端算一套。</p>
+</div>
+
+<!-- ============ 5 ============ -->
+<h2 class="sec" id="s5"><span class="n">5</span> 数据分层：事实层 / 兼容层 / 派生层</h2>
+<div class="card">
+  <p>这是本系统最关键的数据设计。同一件事（比如"今天量了血压"）在不同层里承担不同职责，<b>不得互相替代</b>。</p>
+
+  <table>
+    <thead><tr><th style="width:16%">层</th><th style="width:30%">表</th><th>粒度与语义</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>事实层</b></td>
+        <td><code>blood_pressure_readings</code><br><code>blood_glucose_readings</code><br><code>medication_logs</code></td>
+        <td><b>分钟粒度，一次测量一条，纯追加、永不覆盖。</b>作废只打 <code>record_status='void'</code>，绝不 DELETE。这是"真实发生过什么"的唯一权威记录。</td>
+      </tr>
+      <tr>
+        <td><b>兼容层</b></td>
+        <td><code>daily_health_records</code></td>
+        <td><b>日粒度，一天一行 UPSERT。</b>其中血压 / 血糖值是为让既有规则引擎继续运行而取的「<b>保守兼容代表值</b>」—— 不是当日唯一测量值，也不替代事实层。</td>
+      </tr>
+      <tr>
+        <td><b>派生层</b></td>
+        <td>今日任务 · Rule Score · 预警等级</td>
+        <td><b>全部实时计算，不落库。</b>今日任务由 <code>buildDailyTasks()</code> 生成，进度由当日有效记录派生；评分与等级每次读取时重算。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>兼容层的取值口径（确定性，可复核）</h3>
+  <ul class="tight">
+    <li><b>血压</b>：取当日<b>收缩压最大</b>的那一条（收缩压 / 舒张压成对写入，不跨条混搭）；</li>
+    <li><b>空腹血糖</b>：优先取当日有效「空腹」读数；<b>无空腹则取当日有效血糖最高值</b>；</li>
+    <li>只统计 <code>record_status &lt;&gt; 'void'</code> 的记录。</li>
+  </ul>
+
+  <div class="note ok"><b>「未记录」的语义（Step 11 · D-1 修复后固定）</b>：数据库 <code>NULL</code> 表示「未记录」，<b>不得被当成 0</b>。某天某指标为 NULL → <b>该日不进规则序列</b>（既不进分子也不进分母）。<code>NULL</code> 与真实测得的 <code>0</code> 严格区分。</div>
+
+  <details>
+    <summary>这条为什么重要？—— 一个真实缺陷的完整记录</summary>
+    <p>修复前，视图层为缺测字段补了默认值（<code>systolic ?? 0</code>），使数据库的 <code>NULL</code> 变成"测得 0"进入规则序列。用同一份数据（patient_1，2026-09-15 仅有步数）做对照实验：</p>
+    <table>
+      <thead><tr><th>量</th><th>修复前</th><th>修复后</th></tr></thead>
+      <tbody>
+        <tr><td>最高预警等级</td><td>关注</td><td><b>预警</b></td></tr>
+        <tr><td>命中规则</td><td>R-BG-2（假：当日未测血糖）</td><td><b>R-BP-2（真）</b></td></tr>
+        <tr><td>血压 7 天涨幅</td><td class="num">−136</td><td class="num"><b>+22</b></td></tr>
+        <tr><td>血糖极差 / 最低</td><td class="num">5.8 / 0</td><td class="num"><b>0.6 / 5.2</b></td></tr>
+        <tr><td>血压达标率</td><td class="num">50%</td><td class="num"><b>40%</b></td></tr>
+      </tbody>
+    </table>
+    <p>同一个缺陷<b>同时</b>造成：假预警、掩盖真预警、达标率虚高。修复后三项全部回到真实值。</p>
+  </details>
+</div>
+
+<!-- ============ 6 ============ -->
+<h2 class="sec" id="s6"><span class="n">6</span> 数据库 22 张表清单</h2>
+<div class="card">
+  <p>P0 阶段冻结为 <b>22 张表</b>，Step 11 全阶段<b>零 schema 变更</b>（新能力通过既有 JSON 字段的判别位承载）。</p>
+
+  <table>
+    <thead><tr><th style="width:5%">#</th><th style="width:26%">表名</th><th>归属</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><code>patients</code></td><td>患者主档（含 <code>password_hash</code>：为空 = 免密示范病例）</td></tr>
+      <tr><td class="num">2</td><td><code>patient_contacts</code></td><td>紧急联系人（结构化，含授权状态）</td></tr>
+      <tr><td class="num">3</td><td><code>patient_conditions</code></td><td>疾病诊断</td></tr>
+      <tr><td class="num">4</td><td><code>patient_lifestyle</code></td><td>生活画像</td></tr>
+      <tr><td class="num">5</td><td><code>patient_targets</code></td><td>个体化控制目标 / 步数目标</td></tr>
+      <tr><td class="num">6</td><td><code>doctors</code></td><td>医生</td></tr>
+      <tr><td class="num">7</td><td><code>medications</code></td><td>用药</td></tr>
+      <tr><td class="num">8</td><td><code>doctor_patient_relations</code></td><td>医患关系</td></tr>
+      <tr><td class="num">9</td><td><code>metric_definitions</code></td><td>指标字典</td></tr>
+      <tr><td class="num">10</td><td><code>badge_definitions</code></td><td>勋章定义</td></tr>
+      <tr><td class="num">11</td><td><code>daily_health_records</code></td><td><b>兼容层</b> · 日粒度</td></tr>
+      <tr><td class="num">12</td><td><code>blood_pressure_readings</code></td><td><b>事实层</b> · 分钟粒度</td></tr>
+      <tr><td class="num">13</td><td><code>blood_glucose_readings</code></td><td><b>事实层</b> · 分钟粒度</td></tr>
+      <tr><td class="num">14</td><td><code>lab_results</code></td><td>检验结果</td></tr>
+      <tr><td class="num">15</td><td><code>alerts</code></td><td>落库预警（<b>按患者 + 规则 + 日</b>的快照）</td></tr>
+      <tr><td class="num">16</td><td><code>reminders</code></td><td>用药提醒 · <span class="badge b-gray">已建，按设计未持久化</span></td></tr>
+      <tr><td class="num">17</td><td><code>doctor_notes</code></td><td>医生留言（后端注入签名）</td></tr>
+      <tr><td class="num">18</td><td><code>medication_logs</code></td><td><b>事实层</b> · 服药打卡</td></tr>
+      <tr><td class="num">19</td><td><code>agent_runs</code></td><td>协同轨迹 · <span class="badge b-gray">已建，按设计未持久化</span></td></tr>
+      <tr><td class="num">20</td><td><code>vision_records</code></td><td>图像识别记录</td></tr>
+      <tr><td class="num">21</td><td><code>prescriptions</code></td><td>处方 / 覆盖包 / 提案（<b>靠 <code>kind</code> 三义判别</b>）</td></tr>
+      <tr><td class="num">22</td><td><code>badges</code></td><td>已获勋章</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note"><b>零 schema 变更如何做到？</b>新能力全部挂在既有字段上：<code>prescriptions.target_goals</code>（JSON）里用判别字段区分三种语义 ——
+    <code>kind='task_override_package'</code>（生效的医生覆盖包）· <code>kind='task_proposal'</code>（待审提案）· <b>无 kind</b>（原有健康处方）。
+    步数目标落 <code>patient_targets.steps_target</code>，且<b>只 UPDATE、绝不 INSERT</b>。</div>
+
+  <div class="note ok"><b>可复核事实</b>：全项目检索 <code>INSERT INTO / UPDATE / DELETE FROM</code>，<code>reminders</code> 与 <code>agent_runs</code> <b>零命中</b> —— 两表"已建但未持久化"不是口号，是已验证的事实。</div>
+</div>
+
+<!-- ============ 7 ============ -->
+<h2 class="sec" id="s7"><span class="n">7</span> 确定性规则引擎：13 条规则目录</h2>
+<div class="card">
+  <p><code>src/utils/clinicalRules.js</code> 是<b>唯一的规则判定实现</b>，前端与后端共用。<b>规则判定不依赖大模型</b>；大模型只负责把判定结果转成自然语言。</p>
+
+  <div class="filters">
+    <input id="ruleSearch" type="search" placeholder="输入规则号或关键字筛选，例如 R-BP-2、血糖、连续" />
+    <span class="chip on" data-g="all">全部</span>
+    <span class="chip" data-g="bloodPressure">血压</span>
+    <span class="chip" data-g="bloodSugar">血糖</span>
+    <span class="chip" data-g="weightBehavior">体重与行为</span>
+    <span class="count" id="ruleCount">共 13 条</span>
+  </div>
+
+  <table id="ruleTable">
+    <thead>
+      <tr>
+        <th style="width:10%">规则号</th><th style="width:14%">名称</th>
+        <th style="width:34%">触发条件</th><th style="width:9%">等级</th><th>建议动作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-g="bloodPressure"><td><code>R-BP-1</code></td><td>单次超标提示</td><td>单日收缩压 ≥140 或舒张压 ≥90，且前一日未超标</td><td><span class="badge b-info">提示</span></td><td>记录本次测量，继续监测</td></tr>
+      <tr data-g="bloodPressure"><td><code>R-BP-2</code></td><td>连续异常趋势预警</td><td>连续 ≥3 天收缩压 ≥140 mmHg，且 7 天收缩压涨幅 ≥10 mmHg</td><td><span class="badge b-alert">预警</span></td><td>生成风险工单 + 建议复诊 + 低盐饮食建议</td></tr>
+      <tr data-g="bloodPressure"><td><code>R-BP-3</code></td><td>严重超标强预警</td><td>单日收缩压 ≥180 或舒张压 ≥110 mmHg，或伴随胸痛 / 头晕 / 视物模糊</td><td><span class="badge b-emergency">紧急</span></td><td>强提醒 + 建议立即就医</td></tr>
+      <tr data-g="bloodPressure"><td><code>R-BP-4</code></td><td>授权后通知紧急联系人</td><td>命中 R-BP-2 / R-BP-3，且联系人已授权，且用户本人点击确认</td><td><span class="badge b-alert">预警</span></td><td>通知紧急联系人（<b>默认不自动发送</b>）</td></tr>
+      <tr data-g="bloodSugar"><td><code>R-BG-1</code></td><td>单次超标提示</td><td>单日空腹血糖 &gt; 演示判定阈值，且前一日达标</td><td><span class="badge b-info">提示</span></td><td>记录本次监测</td></tr>
+      <tr data-g="bloodSugar"><td><code>R-BG-2</code></td><td>血糖波动提醒</td><td>7 天极差 ≥1.4 mmol/L</td><td><span class="badge b-watch">关注</span></td><td>生成波动分析</td></tr>
+      <tr data-g="bloodSugar"><td><code>R-BG-3</code></td><td>控制不佳趋势</td><td>7 天达标率 &lt;60%，且 7 天趋势向上</td><td><span class="badge b-alert">预警</span></td><td>生成个性化饮食建议 + 分餐建议</td></tr>
+      <tr data-g="bloodSugar"><td><code>R-BG-4</code></td><td>复查提醒</td><td>距上次 HbA1c 检测 &gt;3 个月</td><td><span class="badge b-info">提示</span></td><td>提醒复查 HbA1c</td></tr>
+      <tr data-g="weightBehavior"><td><code>R-WT-1</code></td><td>记录达成</td><td>当日有体重或运动记录</td><td><span class="badge b-info">提示</span></td><td>积分 +10</td></tr>
+      <tr data-g="weightBehavior"><td><code>R-WT-2</code></td><td>减重进展反馈</td><td>7 天净减 ≥0.5 kg</td><td><span class="badge b-info">提示</span></td><td>生成阶段小结（含水分与测量波动说明）</td></tr>
+      <tr data-g="weightBehavior"><td><code>R-WT-3</code></td><td>短期反弹提醒</td><td>单日体重回升 ≥0.5 kg</td><td><span class="badge b-watch">关注</span></td><td>解读为日常波动，柔性提示，不报警</td></tr>
+      <tr data-g="weightBehavior"><td><code>R-WT-4</code></td><td>运动达标激励</td><td>单日步数 ≥8000，或 7 天累计运动 ≥150 分钟</td><td><span class="badge b-info">提示</span></td><td>正向反馈 + 显示进度</td></tr>
+      <tr data-g="weightBehavior"><td><code>R-WT-5</code></td><td>勋章进度跟进</td><td>存在未解锁的进阶勋章</td><td><span class="badge b-info">提示</span></td><td>展示勋章进度与下一步目标</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note warn"><b>落库范围是设计选择，不是遗漏</b>：命中「提示 / 关注 / 预警 / 紧急」四级都会参与判定，但<b>只有「关注 / 预警 / 紧急」三级会写入 <code>alerts</code> 表</b>（<code>PERSIST_LEVELS = ['emergency','alert','watch']</code>）。「提示」级不入库。</div>
+
+  <div class="note danger"><b>阈值来源口径</b>：以上阈值均为<b>项目内定义的演示规则</b>，代码内以常量形式存在，<b>没有外部指南文件锚点</b>。对外只能说"这是本项目的 Demo 规则"，不得声称来自某部指南。界面文案统一表述为「基于<b>医学指南参考</b>与确定性规则」，其中"医学指南参考"指项目立项时的循证背景（示范病例的个体化控制目标引自 5 部指南，见「示范病例」一节），<b>不代表任何算法阈值有具体指南条款锚点</b>；程序内只说明「内置确定性健康规则引擎（13 条演示规则）」。</div>
+</div>
+
+<!-- ============ 8 ============ -->
+<h2 class="sec" id="s8"><span class="n">8</span> 血压规则阈值明细</h2>
+<div class="card">
+  <p>数据来源：<code>clinicalRules.js</code> 的 <code>evaluateBloodPressure()</code>。目标值 <code>targetSys / targetDia</code> 取自患者的个体化演示阈值（默认 140/90）。</p>
+  <table>
+    <thead><tr><th>判定量</th><th>计算方式</th><th>用途</th></tr></thead>
+    <tbody>
+      <tr><td>收缩压序列</td><td><code>seriesOf(records,'systolic')</code> 按日期升序，<b>只含有记录的日子</b></td><td>所有血压规则的基础</td></tr>
+      <tr><td>单日超标标志</td><td><code>sys ≥ targetSys(140)</code> 或 <code>dia ≥ targetDia(90)</code></td><td>R-BP-1</td></tr>
+      <tr><td>连续异常天数 <code>run</code></td><td>收缩压连续 ≥140 的最长天数</td><td>R-BP-2（需 ≥3 天）</td></tr>
+      <tr><td>7 天涨幅 <code>rise</code></td><td>末值 − 首值</td><td>R-BP-2（需 ≥10 mmHg）</td></tr>
+      <tr><td>最高值 <code>maxSys / maxDia</code></td><td>窗口内最大值</td><td>R-BP-3（≥180 / ≥110）</td></tr>
+      <tr><td>达标率</td><td><code>未超标天数 ÷ 有记录天数 × 100%</code></td><td>统计展示（<b>缺测日不进分母</b>）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note"><b>为什么用"有记录天数"而非"窗口天数"做分母</b>：如果分母固定为 7 天，那么"只测了 1 天且正常"会得到 100%，语义上等于把没测的日子算作达标。本系统取"记录日达标率"，与「未记录 ≠ 达标」保持一致。</div>
+</div>
+
+<!-- ============ 9 ============ -->
+<h2 class="sec" id="s9"><span class="n">9</span> 血糖规则阈值明细</h2>
+<div class="card">
+  <p>数据来源：<code>evaluateBloodSugar()</code>。阈值 <code>threshold</code> 取自患者个体化演示阈值（默认 7.8 mmol/L）。</p>
+  <table>
+    <thead><tr><th>判定量</th><th>计算方式</th><th>阈值 / 用途</th></tr></thead>
+    <tbody>
+      <tr><td>达标标志</td><td><code>value ≤ threshold</code></td><td>分子：达标日数</td></tr>
+      <tr><td>达标率</td><td><code>达标日数 ÷ 有记录天数 × 100%</code></td><td>R-BG-3 需 &lt;60%</td></tr>
+      <tr><td>趋势斜率 <code>slope</code></td><td>对序列做线性拟合</td><td>R-BG-3 需向上</td></tr>
+      <tr><td>极差 <code>range</code></td><td><code>max − min</code></td><td>R-BG-2 需 ≥1.4 mmol/L</td></tr>
+      <tr><td>HbA1c 复查间隔</td><td>距上次检测月数</td><td>R-BG-4 需 &gt;3 个月</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note warn"><b>HbA1c 是长期指标</b>：它反映近 2–3 个月平均血糖，<b>不随 7 天血糖波动变化</b>。因此 R-BG-4 用的是"距上次检测时间"，而不是把 HbA1c 混进 7 天序列。</div>
+</div>
+
+<!-- ============ 10 ============ -->
+<h2 class="sec" id="s10"><span class="n">10</span> 体重与行为规则阈值明细</h2>
+<div class="card">
+  <p>数据来源：<code>evaluateWeightBehavior()</code>，覆盖体重、步数、运动、睡眠等行为类指标。</p>
+  <table>
+    <thead><tr><th>规则</th><th>判定量</th><th>阈值</th></tr></thead>
+    <tbody>
+      <tr><td><code>R-WT-1</code></td><td>当日是否有体重或运动记录</td><td>存在即命中（提示级）</td></tr>
+      <tr><td><code>R-WT-2</code></td><td>7 天净变化 <code>netChange</code></td><td>≤ −0.5 kg（减重进展）</td></tr>
+      <tr><td><code>R-WT-3</code></td><td>单日最大回升 <code>maxRebound</code></td><td>≥ +0.5 kg（柔性提示）</td></tr>
+      <tr><td><code>R-WT-4</code></td><td>单日最高步数 / 周运动分钟</td><td>≥ 8000 步 或 ≥ 150 分钟/周</td></tr>
+      <tr><td><code>R-WT-5</code></td><td>未解锁勋章的进度</td><td>步数达标（8000 步） / 连续记录（7 天）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note"><b>体重波动不报警</b>：R-WT-3 单日回升 ≥0.5 kg 只给「关注」级柔性提示，并在文案里明确解释"可能是饮水、进食、测量时间造成的日常波动，不代表脂肪增加" —— 这是刻意的产品设计，避免让老人对正常波动产生焦虑。</div>
+</div>
+
+<!-- ============ 11 ============ -->
+<h2 class="sec" id="s11"><span class="n">11</span> 产品预警等级与唯一裁定链</h2>
+<div class="card">
+  <h3>四级产品词表</h3>
+  <table>
+    <thead><tr><th>键</th><th>标签</th><th>序</th><th>含义</th><th>是否落库</th></tr></thead>
+    <tbody>
+      <tr><td><code>info</code></td><td><span class="badge b-info">提示</span></td><td class="num">1</td><td>单次轻微异常，继续观察</td><td><span class="badge b-gray">否</span></td></tr>
+      <tr><td><code>watch</code></td><td><span class="badge b-watch">关注</span></td><td class="num">2</td><td>出现波动或反复，需留意</td><td><span class="badge b-ok">是</span></td></tr>
+      <tr><td><code>alert</code></td><td><span class="badge b-alert">预警</span></td><td class="num">3</td><td>连续异常趋势，建议就医或调整方案</td><td><span class="badge b-ok">是</span></td></tr>
+      <tr><td><code>emergency</code></td><td><span class="badge b-emergency">紧急</span></td><td class="num">4</td><td>严重超标或急性症状，需立即处理</td><td><span class="badge b-ok">是</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="note danger"><b>这不是医学危险分层</b>：本词表是<b>产品预警等级</b>，与「高危 / 中危 / 低危」这类医学危险分层<b>互不借用</b>。患者的医学危险分层（如"中危"）记录在病例资料里，与上述等级是两套词表。</div>
+
+  <h3>唯一裁定链（Step 11 · D-2 修复后固定）</h3>
+  <div class="flow">clinicalRules.evaluateClinicalRules()
+        │  matched / byId
+        ├─ triggered  ←「关注及以上」命中项 = 规范风险集合
+        └─ highestLevel = highestAlertLevel(triggered)
+                 │
+                 ├──→ 晨报 briefing.risk（等级 + 标签 + 检出项）
+                 ├──→ alerts 落库（仅关注 / 预警 / 紧急）
+                 └──→ 医生端 evaluation.highestLevel
+
+工具层 assessRisk()
+        └─ 只做转述：risks[] 的等级取自命中项
+           + observations[] 纯描述素材（title / detail / action，不含任何等级键）</div>
+
+  <div class="note ok"><b>四患者实测一致性（线上服务）</b>
+    <table style="margin-top:10px">
+      <thead><tr><th>患者</th><th>晨报 briefing</th><th>规则 highestLevel</th><th>落库预警最高级</th><th>判定</th></tr></thead>
+      <tbody>
+        <tr><td>张建国</td><td>预警 · R-BP-2</td><td>alert</td><td>预警（R-BP-2）</td><td><span class="badge b-ok">一致</span></td></tr>
+        <tr><td>李秀英</td><td>预警 · R-BG-3 / R-BG-2</td><td>alert</td><td>预警（R-BG-3）</td><td><span class="badge b-ok">一致</span></td></tr>
+        <tr><td>王建军</td><td>关注 · R-WT-3</td><td>watch</td><td>关注（R-WT-3）</td><td><span class="badge b-ok">一致</span></td></tr>
+        <tr><td>赵小川</td><td>提示 · 无命中</td><td>info</td><td>无规则告警命中</td><td><span class="badge b-ok">一致</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <details>
+    <summary>修复前的问题是什么？（保留记录）</summary>
+    <p>修复前，晨报等级来自工具层的 <code>assessRisk()</code>，它自带<b>第二套阈值</b>（收缩压 180/160、血糖 16.7/11.1、心率 120/45…），却映射成与规则层<b>同名</b>的中文标签。两套系统在首页同页共现，用户从文案上完全看不出差别。</p>
+    <p>实测 4 例中 <b>3 例不一致</b>：有的顶部显示"预警"而下方卡片只有"关注"；有的顶部说"各项指标平稳"旁边却挂着"关注"级预警。</p>
+    <p><b>修复方式</b>：拆开 <code>assessRisk()</code> 的两个职责 —— 保留「晨报自然语言描述」，把「风险等级裁定」交还 <code>clinicalRules</code>。规则层的医学阈值<b>一字未改</b>，告警规则<b>一条未删</b>，统一的只是「等级来源」。</p>
+  </details>
+</div>
+
+<!-- ============ 12 ============ -->
+<h2 class="sec" id="s12"><span class="n">12</span> 当日健康评分（Rule Score）</h2>
+<div class="card">
+  <p><code>src/utils/healthScore.js</code> 的 <code>computeDailyHealthScore()</code> 是<b>唯一的官方分</b>。它按"适用维度归一化"计算：只有与患者疾病谱相关的维度才计入分母。</p>
+
+  <h3>维度权重</h3>
+  <table>
+    <thead><tr><th>维度</th><th>权重</th><th>适用性判定（疾病谱关键字包含匹配）</th></tr></thead>
+    <tbody>
+      <tr><td>步数</td><td class="num">30</td><td>所有患者恒适用</td></tr>
+      <tr><td>血压</td><td class="num">25</td><td>疾病谱含「高血压 / 血压 / 代谢综合征」</td></tr>
+      <tr><td>血糖</td><td class="num">25</td><td>疾病谱含「糖尿病 / 血糖」</td></tr>
+      <tr><td>运动</td><td class="num">20</td><td>所有患者恒适用</td></tr>
+    </tbody>
+  </table>
+  <p>四维全适用时分母恰为 100（30+25+25+20）。<b>例如</b>：高血压患者只计「步数 + 血压 + 运动」共 75 分满分；无疾病谱的账号只计「步数 + 运动」共 50 分满分。</p>
+
+  <h3>各维度得分阶梯</h3>
+  <table>
+    <thead><tr><th>维度</th><th>达成率阶梯</th></tr></thead>
+    <tbody>
+      <tr><td>步数</td><td class="num">≥10000 步 → 1.0 · ≥8000 → 0.85 · ≥6000 → 0.68 · ≥4000 → 0.5 · &lt;4000 → <code>min(步数/10000, 0.4)</code>（线性段封顶 0.4，防止 9999 步越过 6000 步档）</td></tr>
+      <tr><td>血压</td><td class="num">≤140/90 → 1.0 · ≤160/100 → 0.6 · 其余 → 0.2</td></tr>
+      <tr><td>血糖</td><td class="num">≤7 → 1.0 · ≤8 → 0.8 · ≤10 → 0.6 · 其余 → 0.2</td></tr>
+      <tr><td>运动</td><td class="num">≥60 分钟 → 1.0 · ≥30 → 0.75 · ≥15 → 0.5 · &gt;0 → 0.3 · 0 → <b>0</b>（不做"没记录也送保底分"）</td></tr>
+    </tbody>
+  </table>
+
+  <h3>分档</h3>
+  <table>
+    <thead><tr><th>分数区间</th><th>档位</th></tr></thead>
+    <tbody>
+      <tr><td class="num">≥ 85</td><td>优秀</td></tr>
+      <tr><td class="num">≥ 70</td><td>良好</td></tr>
+      <tr><td class="num">≥ 55</td><td>一般</td></tr>
+      <tr><td class="num">&lt; 55</td><td>需干预</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note ok"><b>缺测不得满分</b>：某维度<b>未录入</b> → 该维度记 0 分，并在 <code>missing[]</code> 中标注。这样"没测"不会被算成"达标"，也不会被算成"没做"而不计入分母 —— 分母固定为适用维度。</div>
+
+  <p><b>与规则层达标率的口径差异（刻意）</b>：Rule Score 算的是「当日综合得分」（分母 = 适用维度，缺测维度记 0 分）；规则层的达标率算的是「记录日达标率」（分母 = 有记录的天数）。两者分母语义本就不同，但<b>同向：都不把缺测当作达标</b>。</p>
+</div>
+
+<!-- ============ 13 ============ -->
+<h2 class="sec" id="s13"><span class="n">13</span> AI 参与评分：两层评分与六条硬约束</h2>
+<div class="card">
+  <p>这一节回答一个容易被质疑的问题：<b>"AI 会不会乱改分数？"</b> 设计答案是：系统只产出<b>两个分数</b>（规则分 / AI 辅助分），而模型<b>永远无法直接输出分数</b> —— 它只能提出可解释的调整项。</p>
+
+  <h3>两层评分与职责（不得混用）</h3>
+  <table>
+    <thead><tr><th style="width:24%">名称</th><th>是什么</th><th style="width:26%">权限</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>规则分</b><br>Rule Score</td>
+        <td><code>computeDailyHealthScore()</code> 的确定性结果</td>
+        <td><span class="badge b-ok">唯一官方分</span> · 界面主数字</td>
+      </tr>
+      <tr>
+        <td><b>AI 辅助分</b><br>AI-assisted Score</td>
+        <td><code>composeAssessedScore(rule, adjustments)</code> 的确定性合成结果</td>
+        <td><span class="badge b-info">仅同屏参考</span> · <b>绝不参与预警 / 档位 / 达标率</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note warn"><b>模型的评估不是一层评分</b>：模型只输出 <code>adjustments[]</code>（每条为「维度 + delta + 理由」），它<b>没有分数形态</b>，只是喂给 AI 辅助分的原料，且必须通过下方六条硬约束校验（任一不满足即整包丢弃）。因此对外统一表述为<b>两层评分</b>——模型的意见只以「理由行」的形式出现在 AI 辅助分里。</div>
+
+  <h3>六条硬约束（任一不满足 → 整包丢弃，不做部分采纳）</h3>
+  <table>
+    <thead><tr><th style="width:6%">#</th><th style="width:34%">约束</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>调整条数 ≤ 4</td><td>防止刷条数</td></tr>
+      <tr><td class="num">2</td><td><code>dimension</code> ∈ 患者适用维度</td><td>不给非相关维度提意见（如无糖尿病的患者不给血糖意见）</td></tr>
+      <tr><td class="num">3</td><td>不得重复 <code>dimension</code></td><td>防止"拆分多条规避 ±5"</td></tr>
+      <tr><td class="num">4</td><td><code>delta</code> 为整数且 |delta| ≤ 5</td><td>单条调整幅度受限</td></tr>
+      <tr><td class="num">5</td><td><code>reason</code> 去空白后 1–80 字</td><td>必须给出理由（"不做黑箱"的前提）</td></tr>
+      <tr><td class="num">6</td><td>Σ|delta| ≤ 10</td><td>总调整幅度受限</td></tr>
+    </tbody>
+  </table>
+
+  <h3>合成、守恒与 clamp</h3>
+  <div class="flow">assisted = clamp(rule + Σdelta, 0, 100)
+clamped   = (assisted !== rawAssisted)
+
+守恒式：assisted − rule === Σdelta
+        ← 仅当 clamped === false 时成立；
+          被 clamp 时必须如实上报 clamped / rawAssisted，绝不静默</div>
+
+  <h3>缓存与状态</h3>
+  <ul class="tight">
+    <li>缓存键 <code>inputHash</code> =（当日体征 + 疾病谱 + Rule Score）的 <b>FNV-1a 32 位</b>稳定哈希。<b>数据一变即失效。</b>刻意不用 <code>node:crypto</code> —— 该模块要同时在浏览器里跑，而它只当缓存键。</li>
+    <li><b>只缓存确定性结果</b>（<code>ok</code> / <code>rejected</code>），<b>不缓存 <code>unavailable</code></b>（瞬时故障；"模型未配置"是零成本布尔复检）。</li>
+    <li><code>aiStatus</code> 三态：<code>ok</code> / <code>unavailable</code>（未配置 / 调用失败 / 结构畸形）/ <code>rejected</code>（违反约束）。<code>GET</code> 冷缓存返回 <code>aiStatus: null</code>（≠ <code>unavailable</code>，界面据此说"生成中"而非"暂不可用"）。</li>
+    <li><b>结构性畸形</b>（<code>structural: true</code>）与<b>违反约束</b>（<code>rejected[]</code>）分开上报 —— 合并会让界面文案撒谎。</li>
+  </ul>
+
+  <h3>9 个拒绝码</h3>
+  <p><code>E_ADJUSTMENTS_NOT_ARRAY</code> · <code>E_TOO_MANY_ADJUSTMENTS</code> · <code>E_UNKNOWN_DIMENSION</code> · <code>E_DIMENSION_NOT_APPLICABLE</code> · <code>E_DUPLICATE_DIMENSION</code> · <code>E_DELTA_NOT_INTEGER</code> · <code>E_DELTA_OUT_OF_RANGE</code> · <code>E_REASON_INVALID</code> · <code>E_DELTA_SUM_EXCEEDED</code></p>
+
+  <div class="note ok"><b>AI 辅助分不会污染任何判定</b>：验收断言 18 / 18b / 18c / 18d 专门证明 —— 生成 AI 辅助分前后，同屏预警等级不变、落库预警逐项不变、晨报口播的分数仍是 Rule Score。</div>
+</div>
+
+<!-- ============ 14 ============ -->
+<h2 class="sec" id="s14"><span class="n">14</span> 今日任务：生成规则与频次</h2>
+<div class="card">
+  <p>今日任务由 <code>buildDailyTasks()</code> <b>确定性生成</b>，来源标记恒为 <code>source = 'rule'</code>。任务<b>不落库</b>，进度由当日有效记录<b>实时派生</b>。AI 无权新增规则外的任务。</p>
+
+  <h3>主任务与频次</h3>
+  <table>
+    <thead><tr><th>taskId</th><th>任务</th><th>常规时段</th><th>升高时段</th><th>单位</th></tr></thead>
+    <tbody>
+      <tr><td><code>bp_monitor</code></td><td>血压监测</td><td>晨起 · 睡前（2 次）</td><td>晨起 · 下午 · 睡前（3 次）</td><td>次</td></tr>
+      <tr><td><code>bg_monitor</code></td><td>血糖监测</td><td>空腹 · 餐后2h（2 次）</td><td>空腹 · 餐后2h · 睡前（3 次）</td><td>次</td></tr>
+      <tr><td><code>weight_record</code></td><td>体重记录</td><td colspan="2">1 次 / 日</td><td>次</td></tr>
+      <tr><td><code>exercise</code></td><td>运动打卡</td><td colspan="2">目标 30 分钟</td><td>分钟</td></tr>
+      <tr><td><code>steps</code></td><td>步数目标</td><td colspan="2">默认 8000 步（可被医生调整）</td><td>步</td></tr>
+    </tbody>
+  </table>
+
+  <h3>低频关注项（合并症专用）</h3>
+  <table>
+    <thead><tr><th>触发条件</th><th>ruleId</th><th>任务</th><th>频次</th></tr></thead>
+    <tbody>
+      <tr><td>合并症含「空腹血糖受损」</td><td><code>DEMO-LF-BG</code></td><td>血糖关注（低频）</td><td>1 次 / 周</td></tr>
+      <tr><td>合并症含「代谢综合征」</td><td><code>DEMO-LF-BP</code></td><td>血压关注（低频）</td><td>2 次 / 周</td></tr>
+    </tbody>
+  </table>
+  <p>低频项<b>只在对应主任务未以全频次生成时</b>附加。例如王建军主诊断为肥胖症 → 主任务走体重管理，其合并症「代谢综合征 / 空腹血糖受损」生成的是每周 1–2 次的低频关注，而不是糖尿病级的每日 2–3 次。</p>
+
+  <div class="note"><b>频次只可能来自规则常量</b>：血压 / 血糖的每日次数只能是 2 或 3，由规则的时段列表长度决定。<b>AI 不得自由生成次数</b> —— 覆盖层也只能在既有枚举内调整时段，不能凭空造新次数。</div>
+
+  <h3>服药任务</h3>
+  <p>服药任务按「药物 × 服用频次」<b>拆成独立实例</b>，每条单独打卡，写入事实层 <code>medication_logs</code>。进度显示为"已完成 / 总数"。</p>
+</div>
+
+<!-- ============ 15 ============ -->
+<h2 class="sec" id="s15"><span class="n">15</span> 医生调整今日任务：覆盖契约</h2>
+<div class="card">
+  <p>医生可以在患者端「今日任务」上做调整。契约的唯一实现在 <code>src/utils/taskOverride.js</code>，<b>前后端共用</b>，但<b>准入判定在后端</b> —— 前端无法绕过。</p>
+
+  <h3>五条红线</h3>
+  <ul class="tight">
+    <li>规则仍是今日任务的<b>唯一生成者</b>；覆盖层只能改<b>规则已经生成的任务</b>的参数，<b>不得新建规则不存在的任务域</b>（对未生成的任务提交覆盖 → 整包拒绝）。</li>
+    <li>医学阈值（140/90、7.0、7.8 等）<b>不得被覆盖层触碰</b>。<code>steps.target</code> / <code>exercise.target</code> 是<b>行为目标</b>（走多少步、动多少分钟），允许覆盖；血压 / 血糖的控制目标数值不允许。</li>
+    <li>第一版<b>整体不接受 <code>enabled: false</code></b>：主诊断监测项 → <code>E_PRIMARY_TASK_DISABLE_FORBIDDEN</code>，其余 → <code>E_DISABLE_NOT_SUPPORTED_IN_V1</code>。<code>enabled: true</code> 视为 no-op。</li>
+    <li>校验是<b>原子</b>的：任一项非法 → 整包拒绝（宁可报错，不要静默忽略）。</li>
+    <li>前端与 AI 都<b>不能绕过</b>后端校验。</li>
+  </ul>
+
+  <h3>可覆盖白名单与字段契约</h3>
+  <table>
+    <thead><tr><th>taskId</th><th>可覆盖字段</th><th>取值约束</th></tr></thead>
+    <tbody>
+      <tr><td><code>steps</code></td><td><code>target</code></td><td class="num">整数 · [1000, 20000] · 必须是 500 的整数倍</td></tr>
+      <tr><td><code>exercise</code></td><td><code>target</code></td><td class="num">整数 · [5, 180] 分钟</td></tr>
+      <tr><td><code>bp_monitor</code></td><td><code>slots</code></td><td>时段枚举（<code>target</code> ≡ 时段数，由 slots 数量表达）</td></tr>
+      <tr><td><code>bg_monitor</code></td><td><code>slots</code></td><td>测量类型枚举（空腹 / 餐后2h / 随机 / 睡前）</td></tr>
+    </tbody>
+  </table>
+
+  <p><b>明确不可覆盖</b>：<code>weight_record</code>（target 恒 1，无有意义的覆盖维度）· <code>DEMO-LF-BP</code> / <code>DEMO-LF-BG</code>（单位是「次/周」，与「次/日」语义不同）。</p>
+
+  <p><b>阈值类字段黑名单</b>：<code>systolic_target</code> · <code>diastolic_target</code> · <code>fasting_glucose_target</code> · <code>hba1c_target</code> · <code>bmi_target</code> —— 出现在覆盖包里一律拒绝。</p>
+
+  <h3>14 个错误码（后端映射为 400 / 409）</h3>
+  <p><code>E_UNKNOWN_TASK_ID</code> · <code>E_TASK_NOT_OVERRIDABLE</code> · <code>E_TASK_NOT_GENERATED_FOR_PATIENT</code> · <code>E_UNKNOWN_FIELD</code> · <code>E_THRESHOLD_FIELD_FORBIDDEN</code> · <code>E_TARGET_OUT_OF_RANGE</code> · <code>E_TARGET_NOT_MULTIPLE_OF_500</code> · <code>E_SLOTS_INVALID</code> · <code>E_PRIMARY_TASK_DISABLE_FORBIDDEN</code> · <code>E_DISABLE_NOT_SUPPORTED_IN_V1</code> · <code>E_BASIS_REQUIRED</code> · <code>E_CONTRACT_VERSION_UNSUPPORTED</code> · <code>E_OVERRIDES_EMPTY</code> · <code>E_INVALID_ARG</code></p>
+
+  <h3>落点（零 schema 变更）</h3>
+  <ul class="tight">
+    <li>生效的覆盖包 → <code>prescriptions.target_goals</code>（JSON，判别位 <code>kind='task_override_package'</code>）；</li>
+    <li>步数目标 → <code>patient_targets.steps_target</code>（走既有读取链路，<b>只 UPDATE、绝不 INSERT</b>）；</li>
+    <li>撤销覆盖 → 完整回落到规则原始值，不残留半生效状态。</li>
+  </ul>
+</div>
+
+<!-- ============ 16 ============ -->
+<h2 class="sec" id="s16"><span class="n">16</span> 对话提案 → 医生审核联动</h2>
+<div class="card">
+  <p>患者可以在对话里说「我想把每天的步数目标改成 6000」。系统把它变成一条<b>待审提案</b>，医生审结后才生效 —— <b>患者端在审结前零变化</b>。</p>
+
+  <div class="note"><b>注册用户走同一条提案通道</b>：注册账号只要完成建档，就与示范病例<b>完全一致</b>地提出任务调整。医生端待审列表<b>无论该患者是否已授权，都会显示申请人姓名</b>，并额外标注该患者的授权状态 —— 避免医生面对一条认不出是谁的待审条目。授权与否只决定医生能否查看其档案，<b>不影响提案进入待审列表</b>。</div>
+
+  <h3>状态机</h3>
+  <div class="flow">生成提案（status = pending_review，is_active = 0）
+        │
+        ├─ 医生「同意」   → approved   → 应用覆盖包，患者端即刻生效
+        ├─ 医生「修改后同意」→ modified → 按医生改后的参数应用
+        └─ 医生「拒绝」   → rejected   → 患者端始终无变化
+
+pending 且生成日期 + 7 天 < 当前时间  →  派生状态 expired</div>
+
+  <h3>三条工程约定</h3>
+  <table>
+    <thead><tr><th style="width:22%">约定</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td><b>7 天懒过期</b></td><td><code>isProposalExpired()</code> 只在读取时判定，<b>不写库</b>。原始 JSON 里的 <code>status</code> 恒为 <code>pending_review</code>，<code>expired</code> 是应用层算出来的派生字段。</td></tr>
+      <tr><td><b>确定性提案通道</b></td><td><code>proposalIntent.js</code> 是<b>零模型依赖</b>的五步流水线：预筛 → 抽取 → 后端注入 <code>currentValue</code> → 过 <code>validateOverridePackage</code> 过滤 → 单轮最多 2 条。<b>没有模型 Key 也能完整演示。</b></td></tr>
+      <tr><td><b>提案不落独立表</b></td><td>提案同样写在 <code>prescriptions.target_goals</code> 里，用 <code>kind='task_proposal'</code> 与生效覆盖包、健康处方区分。待审期 <code>is_active=0</code>，天然不参与覆盖读取。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note"><b>患者原话 → 生效参数</b>的每一步都可核对：<code>currentValue</code> 由<b>后端</b>注入（不由模型或前端提供）；抽取出的参数必须通过覆盖校验器的<b>同一把尺子</b>；未通过的白名单校验的意图直接丢弃，不进入待审列表。</div>
+
+  <div class="note warn"><b>已知限制（保留）</b>：提案审结的两步写入（应用覆盖包 → 标记已审结）<b>不在同一事务</b>。若两步之间进程被终止，会出现「覆盖包已生效、提案仍显示待审」。覆盖应用本身是幂等替换，不会损坏数据；再次审核会产生一条多余版本记录。需异常时序触发，不影响正常演示。</div>
+</div>
+
+<!-- ============ 17 ============ -->
+<h2 class="sec" id="s17"><span class="n">17</span> AI 权限边界与数据写入面</h2>
+<div class="card">
+  <h3>AI 不能做什么（逐条可验证）</h3>
+  <table>
+    <thead><tr><th style="width:30%">能力</th><th>结论</th><th>依据</th></tr></thead>
+    <tbody>
+      <tr><td>修改医学阈值</td><td><span class="badge b-no">不能</span></td><td>阈值是代码常量；验收断言 15 证明评估前后 <code>clinicalRules.js</code> 逐字节不变</td></tr>
+      <tr><td>直接写数据库</td><td><span class="badge b-no">不能</span></td><td>智能体工具层 <code>tools.js</code> 全文件<b>零</b> <code>INSERT / UPDATE / DELETE</code></td></tr>
+      <tr><td>修改患者目标值</td><td><span class="badge b-no">不能</span></td><td>验收断言 15b：评估前后 <code>patient_targets</code> 全部行逐项相等</td></tr>
+      <tr><td>直接输出健康分数</td><td><span class="badge b-no">不能</span></td><td>提示词明令禁止；代码只消费 <code>adjustments</code>，分数由确定性函数合成</td></tr>
+      <tr><td>新建规则外的任务</td><td><span class="badge b-no">不能</span></td><td>覆盖层只能改已生成任务的参数；对未生成任务提交覆盖 → 整包拒绝</td></tr>
+      <tr><td>决定预警等级</td><td><span class="badge b-no">不能</span></td><td>等级唯一来源是 <code>clinicalRules</code>；工具层只转述</td></tr>
+      <tr><td>自动外发通知</td><td><span class="badge b-no">不能</span></td><td>紧急联系人通知需「已授权 + 用户本人点击确认」两个条件同时满足</td></tr>
+    </tbody>
+  </table>
+
+  <h3>数据写入面（全量盘点）</h3>
+  <p>全项目有写操作的表共 <b>12 张</b>，集中在 <b>5 个数据服务文件</b>：</p>
+  <table>
+    <thead><tr><th style="width:34%">文件</th><th>可写表</th><th style="width:8%">张数</th></tr></thead>
+    <tbody>
+      <tr><td><code>data/patientService.js</code></td><td><code>patients</code> · <code>patient_contacts</code> · <code>patient_conditions</code> · <code>patient_lifestyle</code> · <code>daily_health_records</code> · <code>blood_pressure_readings</code> · <code>blood_glucose_readings</code> · <code>medication_logs</code></td><td class="num">8</td></tr>
+      <tr><td><code>data/taskOverrideService.js</code></td><td><code>patient_targets</code> · <code>prescriptions</code></td><td class="num">2</td></tr>
+      <tr><td><code>data/proposalService.js</code></td><td><code>prescriptions</code></td><td class="num">1</td></tr>
+      <tr><td><code>data/alertService.js</code></td><td><code>alerts</code></td><td class="num">1</td></tr>
+      <tr><td><code>data/doctorNoteService.js</code></td><td><code>doctor_notes</code></td><td class="num">1</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note ok">
+    <b>三条可复核的结论</b>：
+    <ul class="tight" style="margin-bottom:0">
+      <li>取数契约层 <code>dataProvider.js</code> <b>零写操作</b> —— 它只负责读取与字段映射；</li>
+      <li><code>reminders</code> 与 <code>agent_runs</code> <b>全项目零写操作</b> —— "已建但按设计未持久化"得到验证；</li>
+      <li>智能体工具层 <code>tools.js</code> <b>零写操作</b> —— AI 不能直接改库。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ 18 ============ -->
+<h2 class="sec" id="s18"><span class="n">18</span> 接口一览（35 条）</h2>
+<div class="card">
+  <table>
+    <thead><tr><th style="width:8%">方法</th><th style="width:46%">路径</th><th>用途</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/status</code></td><td>服务与模型配置状态</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/agents</code></td><td>智能体清单</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/patients</code></td><td>患者列表（含免密示范病例）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/patients/login</code></td><td>登录（示范病例免密；注册账号校验 scrypt 哈希）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/patients/register</code></td><td>自助注册（落 <code>patients</code>，不自动登录）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/patients/reset-password</code></td><td>重置密码（用户名 + 注册手机号双因子）</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/patients/:patientId/profile</code></td><td>患者档案</td></tr>
+      <tr><td><span class="badge b-todo">PUT</span></td><td><code>/api/patients/:patientId/profile</code></td><td><b>完善 / 更新健康档案</b>（六类档案一次提交，单事务落库）</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/patients/:patientId/snapshot</code></td><td>当日快照</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/patients/:patientId/series/:metricKey</code></td><td>指标时间序列</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/patients/:patientId/records</code></td><td>健康记录</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/patients/:patientId/records</code></td><td>写入日粒度记录（兼容层）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/patients/:patientId/readings</code></td><td>写入一次测量（<b>事实层，追加不覆盖</b>）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/patients/:patientId/medication-logs</code></td><td>服药打卡</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/patients/:patientId/daily-tasks</code></td><td>今日任务（实时派生）</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/patients/:patientId/badges</code></td><td>勋章</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/patients/:patientId/alerts</code></td><td>落库预警</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/patients/:patientId/score</code></td><td>评分（<b>只读缓存，绝不触发模型调用</b>）</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/patients/:patientId/care-team</code></td><td>我的医疗团队（含每位医生的授权状态）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/patients/:patientId/care-team/:doctorId</code></td><td><b>患者本人授权 / 撤回授权</b>（决定医生端是否可见）</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/patients/:patientId/doctor-notes</code></td><td>医生留言</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/patients/:patientId/doctor-notes/:noteId/read</code></td><td>标记留言已读</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/doctors/:doctorId/patients</code></td><td>医生名下患者</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/doctors/:doctorId/patients/:patientId/tasks</code></td><td>医生视角的任务与规则评估</td></tr>
+      <tr><td><span class="badge b-todo">PUT</span></td><td><code>/api/doctors/:doctorId/patients/:patientId/task-overrides</code></td><td><b>医生调整今日任务</b>（走覆盖契约）</td></tr>
+      <tr><td><span class="badge b-no">DELETE</span></td><td><code>/api/doctors/:doctorId/patients/:patientId/task-overrides/:taskId</code></td><td>撤销覆盖</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/doctors/:doctorId/patients/:patientId/notes</code></td><td>医生留言（后端注入签名）</td></tr>
+      <tr><td><span class="badge b-gray">GET</span></td><td><code>/api/doctors/:doctorId/task-proposals</code></td><td>待审提案列表</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/doctors/:doctorId/task-proposals/:proposalId/review</code></td><td><b>提案审结</b>（同意 / 修改后同意 / 拒绝）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/agent/care-plan</code></td><td><b>六智能体协同健康方案</b>（SSE 流，产出 <code>carePlan</code> 成品供「健康建议」页展示）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/agent/briefing</code></td><td>晨报（<b>纯本地算法，不依赖模型</b>）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/agent/score</code></td><td>AI 两层评分（可 <code>force</code> 重算）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/agent/orchestrate</code></td><td>多智能体协同（SSE 流）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/agent/chat</code></td><td>对话（SSE 流，可产出提案事件）</td></tr>
+      <tr><td><span class="badge b-info">POST</span></td><td><code>/api/vision/read</code></td><td>体检单 / 血糖仪照片解读</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============ 19 ============ -->
+<h2 class="sec" id="s19"><span class="n">19</span> 系统边界：能做到 / 不能做到</h2>
+<div class="card">
+  <div class="two">
+    <div>
+      <h4><span class="badge b-ok">能做到</span></h4>
+      <ul class="tight">
+        <li><b>确定性判定</b>：13 条规则的阈值与命中由代码计算，同一份输入永远得到同一份结果。</li>
+        <li><b>可追溯的解释</b>：每条命中都带规则号、依据（basis）、动作建议。</li>
+        <li><b>未记录与测得 0 严格区分</b>：缺测不进分子也不进分母。</li>
+        <li><b>一次测量一条</b>：事实层纯追加，永不覆盖；作废只打状态位。</li>
+        <li><b>等级唯一</b>：晨报 / 落库预警 / 医生端三级同源。</li>
+        <li><b>AI 参与但不越权</b>：AI 只能提"意见"，不能给分、不能改阈值、不能写库。</li>
+        <li><b>医生把关</b>：来自对话的任务调整必须医生审结后才生效。</li>
+        <li><b>模型不可用时仍可用</b>：无 Key 自动降级，规则与页面照常。</li>
+      </ul>
+    </div>
+    <div>
+      <h4><span class="badge b-no">不能做到 / 不承诺</span></h4>
+      <ul class="tight">
+        <li><b>不是医疗器械</b>：不做诊断，不替代医生判断。</li>
+        <li><b>阈值非指南来源</b>：全部是项目内定义的演示规则。</li>
+        <li><b>无账号鉴权体系</b>：医生端写接口只校验 <code>doctorId</code> 存在，不校验请求者身份。</li>
+        <li><b>无实时推送</b>：全项目无 polling / WebSocket；跨端变更需重新进页面。</li>
+        <li><b>跨日预警会重复呈现</b>：<code>alerts</code> 是按「患者 + 规则 + 日」的快照，跨天使用同一账号会看到重复卡片。</li>
+        <li><b>勋章运行时不解锁</b>：只有种子数据，新勋章靠 seed 写入。</li>
+        <li><b>不做用药建议</b>：药量与方案调整一律指向"联系医生"。</li>
+        <li><b>不自动外发通知</b>：紧急联系人通知需用户本人点击确认。</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 20 ============ -->
+<h2 class="sec" id="s20"><span class="n">20</span> 当前版本限制与后续方向</h2>
+<div class="card">
+  <p>以下项目<b>均已知、已记录、故意保留在当前版本之外</b>。列出它们的目的是：不以"再扩展一点功能"的方式掩盖边界。</p>
+
+  <h3>A. 当前版本限制（工程折中 / 已知限制）</h3>
+  <table>
+    <thead><tr><th style="width:6%">#</th><th style="width:30%">项目</th><th>说明</th><th style="width:12%">影响</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>缓存键不含近 7 日窗口</td><td><code>inputHash</code> 只含「当日体征 + 疾病谱 + Rule Score」；若历史某天被回改而当日未变，缓存不失效。</td><td><span class="badge b-gray">低</span></td></tr>
+      <tr><td class="num">2</td><td>目标表无 DB 级唯一约束</td><td><code>patient_targets</code> 的 active 唯一性靠 <code>UPDATE</code> + 排序兜底，而非数据库约束。</td><td><span class="badge b-gray">低</span></td></tr>
+      <tr><td class="num">3</td><td>无鉴权 / 无会话层</td><td>医生端写接口只校验 <code>doctorId</code> 存在。属刻意取舍。</td><td><span class="badge b-watch">中</span></td></tr>
+      <tr><td class="num">4</td><td>实际没有 polling</td><td>实时性 = 按需拉取 + 对话 / 协同 SSE；跨端变更需重新进页面。</td><td><span class="badge b-gray">低</span></td></tr>
+      <tr><td class="num">5</td><td>勋章运行时不解锁</td><td><code>badges</code> 只有 seed 写入，只能展示"还差多少"。</td><td><span class="badge b-gray">低</span></td></tr>
+      <tr><td class="num">6</td><td>血压序列位置配对</td><td>舒张压与收缩压按索引位置配对；当前不可达（上游恒成对输出）。</td><td><span class="badge b-gray">当前无</span></td></tr>
+      <tr><td class="num">7</td><td>"极简 LRU"实为 FIFO</td><td>缓存注释与实现不一致；演示规模（上限 200）无影响。</td><td><span class="badge b-gray">无</span></td></tr>
+      <tr><td class="num">8</td><td>预警是每日快照</td><td>跨日使用同一账号会出现重复卡片（前端按 <code>limit=20</code> 取、不按日期过滤）。</td><td><span class="badge b-gray">低</span></td></tr>
+      <tr><td class="num">9</td><td>提案审结非原子</td><td>应用覆盖包与标记已审结不在同一事务；需异常时序触发。</td><td><span class="badge b-gray">低</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>B. 后续方向（未来扩展，不影响当前版本）</h3>
+  <table>
+    <thead><tr><th style="width:6%">#</th><th style="width:34%">方向</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><code>prescriptions</code> 拆表</td><td>把「健康处方 / 覆盖包 / 提案」拆成独立表，取代 <code>kind</code> 判别位</td></tr>
+      <tr><td class="num">2</td><td><code>patient_targets</code> 正式版本化</td><td>引入生效区间与 DB 级唯一约束</td></tr>
+      <tr><td class="num">3</td><td>提案状态机落库</td><td>状态与审结时间持久化，取代懒过期派生</td></tr>
+      <tr><td class="num">4</td><td>AI 辅助分落库</td><td>保留历史趋势（当前刻意不落库）</td></tr>
+      <tr><td class="num">5</td><td>实时推送</td><td>polling 或 WebSocket，实现跨端变更即时同步</td></tr>
+      <tr><td class="num">6</td><td>规则与模型可配置化</td><td>阈值、频次从代码常量迁移为可配置项（含外部来源标注）</td></tr>
+      <tr><td class="num">7</td><td>多模态与语音</td><td>语音输入、更多影像类型的结构化抽取</td></tr>
+      <tr><td class="num">8</td><td>登录鉴权与会话层</td><td>医生端引入会话与权限校验</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============ 21 ============ -->
+<h2 class="sec" id="s21"><span class="n">21</span> 验收证据：20 个脚本 612 / 625</h2>
+<div class="card">
+  <div class="kpi">
+    <div><b>20</b><span>验收脚本</span></div>
+    <div><b>18</b><span>全绿脚本</span></div>
+    <div><b>612</b><span>通过断言</span></div>
+    <div><b>625</b><span>断言总数</span></div>
+  </div>
+
+  <h3>契约与服务端类（12 个脚本，跑在副本库上）—— 421 / 421</h3>
+  <table>
+    <thead><tr><th style="width:44%">脚本</th><th>验证内容</th><th style="width:14%">结果</th></tr></thead>
+    <tbody>
+      <tr><td><code>verify-dataProvider</code></td><td>取数契约与来源证明（写库 → 读库 → 回滚）</td><td class="num">27 / 27</td></tr>
+      <tr><td><code>verify-step4</code></td><td>前端 API 接入链路</td><td class="num">26 / 26</td></tr>
+      <tr><td><code>verify-step5</code></td><td>Agent 数据链路</td><td class="num">28 / 28</td></tr>
+      <tr><td><code>verify-step6</code></td><td>端到端最终验收 + 红线措辞静态扫描（真实库零改动）</td><td class="num">46 / 46</td></tr>
+      <tr><td><code>verify-readings</code></td><td>一天多次测量「追加不覆盖」+ 兼容层取值口径</td><td class="num">21 / 21</td></tr>
+      <tr><td><code>verify-daily-tasks</code></td><td>动态今日任务 + 覆盖层不改变任务域</td><td class="num">29 / 29</td></tr>
+      <tr><td><code>verify-doctor-task-override</code></td><td>医生调整任务全链路（14 类错误码）</td><td class="num">49 / 49</td></tr>
+      <tr><td><code>verify-task-proposal</code></td><td>对话提案 → 医生审核（含无 Key 降级通道）</td><td class="num">29 / 29</td></tr>
+      <tr><td><code>verify-fallback-flag</code></td><td>降级开关两个方向都真实改变行为</td><td class="num">29 / 29</td></tr>
+      <tr><td><code>verify-score-basedate</code></td><td>评分基准日恒为真实今天（含反事实对照）</td><td class="num">33 / 33</td></tr>
+      <tr><td><code>verify-care-team</code></td><td>隐私授权闭环：注册 ≠ 授权、撤回不删行</td><td class="num">38 / 38</td></tr>
+      <tr><td><code>verify-new-user-flow</code></td><td><b>注册用户 0 → 1 全链路</b>（建档 → 任务派生 → 记录 → 提案 → 医生审结 → 协同方案 → 规则评分）</td><td class="num">66 / 66</td></tr>
+    </tbody>
+  </table>
+
+  <h3>浏览器 / 端到端类（7 个脚本，跑在真实前后端）—— 170 / 173</h3>
+  <table>
+    <tbody>
+      <tr><td style="width:44%"><code>verify-task-actions</code></td><td>今日任务卡片交互（真实值 / 点击聚焦）</td><td class="num" style="width:14%">19 / 19</td></tr>
+      <tr><td><code>verify-ui-routes</code></td><td>逐路由冒烟 + 已知缺陷类告警必须 0</td><td class="num">15 / 15</td></tr>
+      <tr><td><code>verify-auth-gate</code></td><td>「先注册后才能登录」端到端闭环</td><td class="num">16 / 16</td></tr>
+      <tr><td><code>verify-health-score</code></td><td>评分口径（缺测不得满分 / 三端同源）</td><td class="num">30 / 30</td></tr>
+      <tr><td><code>verify-ai-score</code></td><td>两层评分（约束 / clamp / 缓存 / 同屏展示）</td><td class="num">64 / 64</td></tr>
+      <tr><td><code>verify-profile-modal</code></td><td><b>建档弹窗自动弹出行为</b>（未建档必弹 / 已建档不弹，<b>两个入口都跑</b>）</td><td class="num">4 / 4</td></tr>
+      <tr><td><code>verify-register-flow</code></td><td>注册 → 录入 → 规则命中 → 预警落库 → 授权后医生端可见</td><td class="num">22 / 25</td></tr>
+    </tbody>
+  </table>
+
+  <h3>缺陷修复定向类（1 个脚本）—— 21 / 31</h3>
+  <p><code>verify-step11-fixes</code>：反事实实验 · 真 0 保真 · 缺测语义 · 工具层零阈值静态扫描 · 四患者三级一致性 · 真实库零改动。</p>
+
+  <details>
+    <summary>为什么 <code>verify-register-flow</code> 是 22 / 25？（如实说明，不修改测试）</summary>
+    <p>该脚本写于「注册即授权」的<b>旧语义</b>下，其中 3 条断言直接断言旧行为（「医生端随库出现该患者」「患者总数 = 示范 3 + 新注册 1」）。隐私改造后「注册不再等于授权」，这 3 条<b>必然失败</b>；另外该脚本把医生端患者总数<b>硬编码</b>为 4，而库里存在真实注册账号 <code>patient_4</code>「赵小川」。</p>
+    <p>这是<b>脚本断言与新语义不一致</b>，不是业务逻辑缺陷。<b>未为了让它全绿而修改业务逻辑或放宽断言</b>；待改为「注册后不可见 → 授权后可见」。</p>
+  </details>
+
+  <details>
+    <summary>为什么 <code>verify-step11-fixes</code> 是 21 / 31？（如实说明，不修改测试）</summary>
+    <p>该脚本这 10 条断言都依赖同一个<b>样本前提</b>：patient_1 在窗口末端应有一个「<b>只录了步数</b>」的缺测日（脚本原注释指向主库 2026-09-15）。该前提来自上一轮修复时的临时数据状态；此后真实库被正常使用填满，演示库的种子数据也是「截至今天的连续 7 天」—— <b>两个库里都不再有缺测日</b>，脚本找不到样本，10 条断言（<code>1a / 1c / 1d / 3a–3f / 4b</code>）连锁失败。</p>
+    <p>失败点全部集中在「样本是否存在」，<b>与缺测语义本身的实现无关</b>。修法是让该脚本<b>自造样本</b>（在副本库内把某日的血压 / 血糖置 NULL），属独立一轮的脚本改造；本轮<b>未改动它的任何断言</b>。</p>
+  </details>
+
+  <details>
+    <summary>为什么 <code>verify-ai-score</code> 有时显示 63 / 63？</summary>
+    <p>该脚本末条断言 <code>Z2</code>（出厂真实库零改动）<b>仅在数据库路径环境变量指向副本库时才注册</b>。不设该变量时自然少一条，得 63 / 63；按基线口径（指向副本库）运行即为 <b>64 / 64</b>。<b>不是回归。</b></p>
+  </details>
+
+  <div class="note ok"><b>隔离约定</b>：所有写入型验收一律在环境变量指向的<b>副本库</b>上执行，真实库 <code>data/mycare.db</code> 以「修改时间 + 文件大小」前后比对<b>自证零改动</b>。</div>
+  <div class="note warn"><b>跑法本身是前提</b>：上表数字按各脚本<b>推荐的基准库口径</b>实测。同一个脚本用错基准库会得到完全不同的数字 —— 例如 <code>verify-ai-score</code> 不指向副本库时，被测患者当日无记录会导致规则分为 0，守恒断言随之不成立，掉成 61 / 63。<b>这是跑法差异，不是回归。</b></div>
+</div>
+
+<!-- ============ 22 ============ -->
+<h2 class="sec" id="s22"><span class="n">22</span> 十条真实性保证</h2>
+<div class="card">
+  <p>以下十条是本系统<b>可以被代码与已执行验收证明</b>的事实。除此之外的表述都不应作为系统能力宣称。</p>
+
+  <table>
+    <thead><tr><th style="width:6%">#</th><th style="width:34%">保证</th><th>证明方式</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><b>今日任务完全由确定性规则派生</b>，AI 无法新增规则外任务</td><td><code>buildDailyTasks()</code> 单一入口，<code>source</code> 恒为 <code>rule</code>（8 处赋值）；覆盖层只能改已生成任务的参数</td></tr>
+      <tr><td class="num">2</td><td><b>医学判定不过模型</b></td><td>13 条规则的阈值与命中全部在 <code>clinicalRules.js</code> 计算，模型不参与判定</td></tr>
+      <tr><td class="num">3</td><td><b>AI 无法修改阈值、数据与任务</b></td><td>工具层零写操作；断言 15 证明 <code>clinicalRules.js</code> 逐字节不变；断言 15b 证明 <code>patient_targets</code> 全部行逐项相等</td></tr>
+      <tr><td class="num">4</td><td><b>AI 不能直接给分</b></td><td>模型只输出 <code>adjustments[]</code>（意见）；分数由 <code>composeAssessedScore()</code> 确定性合成</td></tr>
+      <tr><td class="num">5</td><td><b>AI 不可用不影响主流程</b></td><td>无 Key / 调用失败 / 结构畸形 → 回落 Rule Score，页面照常显示；<code>verify-fallback-flag</code> 29 项验证两个方向</td></tr>
+      <tr><td class="num">6</td><td><b>医生审结前患者端零变化</b></td><td>提案待审期 <code>is_active=0</code>，天然不参与覆盖读取</td></tr>
+      <tr><td class="num">7</td><td><b>写入面收敛</b></td><td>12 张表可写、集中在 5 个数据服务文件；取数契约层与工具层均为零写操作</td></tr>
+      <tr><td class="num">8</td><td><b>降级开关可控</b></td><td><code>ALLOW_MOCK_FALLBACK=false</code> 时无 Key 直接报错、模型错误原样抛出</td></tr>
+      <tr><td class="num">9</td><td><b>未记录不会被当作有效测量</b>（本版新增保证）</td><td><code>NULL</code> 与 <code>0</code> 严格区分；缺测日既不进分子也不进分母；断言 1a–1e / 2a–2c / 3a–3f 逐条验证</td></tr>
+      <tr><td class="num">10</td><td><b>注册用户与示范病例走同一条代码路径</b>（本版新增保证）</td><td>同一条 <code>buildDailyTasks()</code> 派生今日任务、同一套 <code>clinicalRules.js</code> 判定、同一条提案通道；<code>verify-new-user-flow</code> 从注册一路跑到规则评分，<b>66 项全绿</b></td></tr>
+    </tbody>
+  </table>
+
+  <div class="note ok"><b>另有一条本版新增的并列保证</b>：<b>同一套医学风险判定来源</b> —— 晨报等级 / 落库预警 / 医生端评估三级同源，四位患者 4 / 4 一致（对应第 11 节）。</div>
+
+  <h3>明确不能声称的六条</h3>
+  <table>
+    <thead><tr><th style="width:36%">不能声称</th><th>原因</th></tr></thead>
+    <tbody>
+      <tr><td>阈值有医学指南依据</td><td>全部是项目内定义的演示规则，无外部来源锚点</td></tr>
+      <tr><td>AI 辅助分是临床评分</td><td>它是辅助展示层，不参与任何分级</td></tr>
+      <tr><td>具备实时同步</td><td>全项目无 polling / WebSocket</td></tr>
+      <tr><td>具备账号鉴权</td><td>医生端写接口不校验请求者身份</td></tr>
+      <tr><td>数据可跨日无重复呈现</td><td>预警按「患者 + 规则 + 日」快照，跨日会出现重复卡片</td></tr>
+      <tr><td>本系统可作诊断用途</td><td>非医疗器械，不做诊断，不替代医生判断</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note danger"><b>数据来源声明</b>：本系统演示数据由项目自行构造（三位示范病例的病史、体征序列、用药、阈值均为演示设定），<b>不来自任何真实患者</b>。所有医学阈值、评分阶梯、任务频次均为<b>项目内定义的 Demo 规则</b>，不构成医学建议。任何健康决策请咨询执业医师。</div>
+</div>
+
+<footer>
+  <p><b>迈康 MyCare</b> · 系统说明书（最终版）· 2026-09-16</p>
+  <p>本说明书中的所有数值、阈值、字段与流程均取自当前仓库代码（<code>src/utils/clinicalRules.js</code> · <code>healthScore.js</code> · <code>aiScore.js</code> · <code>dailyTasks.js</code> · <code>taskOverride.js</code> · <code>server/data/*</code>），不引用设计稿中的未实现内容。</p>
+  <p>配套文档：<code>Step11_Final_Logic_Audit_v2.md</code>（缺陷修复复核版）· <code>Step11_Final_Logic_Audit.md</code>（首轮审计）。</p>
+</footer>
+
+</main>
+</div>
+
+<script>
+/* ---------- 规则表筛选 ---------- */
+(function () {
+  var input = document.getElementById('ruleSearch')
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#ruleTable tbody tr'))
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.filters .chip'))
+  var count = document.getElementById('ruleCount')
+  var group = 'all'
+  var total = rows.length
+
+  function apply() {
+    var q = (input.value || '').trim().toLowerCase()
+    var shown = 0
+    rows.forEach(function (tr) {
+      var okGroup = group === 'all' || tr.getAttribute('data-g') === group
+      var okText = !q || tr.textContent.toLowerCase().indexOf(q) !== -1
+      var ok = okGroup && okText
+      tr.style.display = ok ? '' : 'none'
+      if (ok) shown++
+    })
+    count.textContent = shown === total ? '共 ' + total + ' 条' : '匹配 ' + shown + ' / ' + total + ' 条'
+  }
+
+  if (input) input.addEventListener('input', apply)
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      chips.forEach(function (x) { x.classList.remove('on') })
+      c.classList.add('on')
+      group = c.getAttribute('data-g')
+      apply()
+    })
+  })
+
+  /* ---------- 目录滚动高亮 ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('#tocList a'))
+  var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')) })
+
+  function spy() {
+    var y = window.scrollY + 130
+    var idx = 0
+    for (var i = 0; i < secs.length; i++) {
+      if (secs[i] && secs[i].offsetTop <= y) idx = i
+    }
+    links.forEach(function (a, i) { a.classList.toggle('on', i === idx) })
+  }
+  window.addEventListener('scroll', spy, { passive: true })
+  spy()
+})()
+</script>
+</body>
+</html>

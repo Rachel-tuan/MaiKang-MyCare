@@ -1,0 +1,44 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', flexDirection: 'row' }}>
+  {/* 左深蓝栏 */}
+  <Box style={{ width: 360, height: '100%', background: '#0E3F8C', flexDirection: 'column', justifyContent: 'center', padding: '0 48px', gap: 18 }}>
+    <Text style={{ fontSize: 56, fontWeight: 'bold', color: '#FFFFFF' }}>目录</Text>
+    <Box style={{ width: 64, height: 4, background: '#FFC107' }} />
+    <Text style={{ fontSize: 20, color: '#C9D8F0', lineHeight: 1.7 }}>迈康 MyCare<br />老年慢病多智能体<br />协同健康管理平台</Text>
+    <Text style={{ fontSize: 16, color: '#8B9CC4', marginTop: 30 }}>CONTENTS</Text>
+  </Box>
+  {/* 右条目区 */}
+  <Box style={{ flex: 1, height: '100%', flexDirection: 'column', justifyContent: 'center', padding: '0 70px', gap: 30 }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 24 }}>
+      <Box style={{ width: 64, height: 64, background: '#1E4FA8', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#FFFFFF' }}>01</Text>
+      </Box>
+      <Box style={{ flex: 1, flexDirection: 'column', gap: 6 }}>
+        <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1A2230' }}>项目定位与技术架构</Text>
+        <Text style={{ fontSize: 18, color: '#4A5568' }}>能记录、能判定、能解释、能被医生调整 · 六智能体 · 数据三层设计</Text>
+      </Box>
+    </Box>
+    <Box style={{ width: '100%', height: 1, background: '#E5E7EB' }} />
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 24 }}>
+      <Box style={{ width: 64, height: 64, background: '#1E4FA8', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#FFFFFF' }}>02</Text>
+      </Box>
+      <Box style={{ flex: 1, flexDirection: 'column', gap: 6 }}>
+        <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1A2230' }}>规则引擎与评分体系</Text>
+        <Text style={{ fontSize: 18, color: '#4A5568' }}>13 条确定性规则 · 四级预警等级 · 规则分与 AI 辅助分两层评分</Text>
+      </Box>
+    </Box>
+    <Box style={{ width: '100%', height: 1, background: '#E5E7EB' }} />
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 24 }}>
+      <Box style={{ width: 64, height: 64, background: '#1E4FA8', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#FFFFFF' }}>03</Text>
+      </Box>
+      <Box style={{ flex: 1, flexDirection: 'column', gap: 6 }}>
+        <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1A2230' }}>任务管理、权限边界与验收</Text>
+        <Text style={{ fontSize: 18, color: '#4A5568' }}>今日任务生成 · 医生覆盖契约 · AI 权限白名单 · 验收证据</Text>
+      </Box>
+    </Box>
+    <Box style={{ marginTop: 26, background: '#F0F5FC', borderRadius: 10, padding: '16px 24px' }}>
+      <Text style={{ fontSize: 17, color: '#1E4FA8' }}>主线：事实层与规则层分离 —— 数据只描述「发生了什么」，规则只回答「这意味着什么」，模型只负责「怎么说给人听」。</Text>
+    </Box>
+  </Box>
+</Slide>

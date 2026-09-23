@@ -1,0 +1,61 @@
+<Slide style={{ width: 1280, height: 720, background: '#F7F9FC', flexDirection: 'column' }}>
+  {/* 页眉 A3 */}
+  <Box style={{ width: '100%', height: 80, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', padding: '0 40px', gap: 16 }}>
+    <Box style={{ width: 6, height: 36, background: '#FFC107' }} />
+    <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#FFFFFF' }}>AI 权限边界与写入面</Text>
+    <Text style={{ fontSize: 17, color: '#C9D8F0', marginLeft: 18 }}>AI 只说不做 · 做必走契约</Text>
+  </Box>
+  {/* 内容区 */}
+  <Box style={{ height: 580, flexDirection: 'row', padding: '20px 40px', gap: 24 }}>
+    {/* 左：原则卡 + 真实建议页截图 */}
+    <Box style={{ width: 440, flexDirection: 'column', gap: 14 }}>
+      <Box style={{ background: '#0E3F8C', borderRadius: 12, padding: '18px 22px' }}>
+        <Text style={{ fontSize: 19, color: '#FFFFFF', fontWeight: 600, lineHeight: 1.6 }}>
+          AI 只产出自然语言解释与结构化提案；真正落库必须经用户或医生确认。
+        </Text>
+      </Box>
+      <Image src="assets/prescription.png" style={{ width: 440, height: 248, objectFit: 'cover', borderRadius: 12, border: '1px solid #D6DCE5' }} />
+      <Text style={{ fontSize: 14, color: '#8B97A8' }}>▲ 健康建议页：模型只负责「怎么说」，内容由规则与处方契约生成（真实界面）</Text>
+      <Box style={{ background: '#E8EFF8', borderRadius: 10, padding: '12px 18px', flex: 1, justifyContent: 'center' }}>
+        <Text style={{ fontSize: 15, color: '#0E3F8C', lineHeight: 1.6 }}>模型不可用时走确定性降级通道（mockChat），主流程不依赖模型、降级开关可控。</Text>
+      </Box>
+    </Box>
+    {/* 右：7 件不能做 + 写入面白名单 */}
+    <Box style={{ flex: 1, flexDirection: 'column', gap: 14 }}>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '16px 20px' }}>
+        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0E3F8C', marginBottom: 8 }}>AI 不能做的 7 件事</Text>
+        <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.75 }}>
+          ① 不能直接写入任何健康读数　　② 不能自定规则阈值或预警等级<br />
+          ③ 不能直接修改 Rule Score　　④ 不能跳过医生确认发通知<br />
+          ⑤ 不能删除覆盖用户原始记录　　⑥ 不能输出诊断或处方结论<br />
+          ⑦ 不能写入超出白名单的表
+        </Text>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '16px 20px', flex: 1, flexDirection: 'column', justifyContent: 'center', gap: 10 }}>
+        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0E3F8C' }}>写入面白名单制</Text>
+        <Box style={{ flexDirection: 'row', gap: 12 }}>
+          <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 8, padding: '12px 16px' }}>
+            <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1E4FA8' }}>12 张</Text>
+            <Text style={{ fontSize: 15, color: '#4A5568' }}>数据库白名单表</Text>
+          </Box>
+          <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 8, padding: '12px 16px' }}>
+            <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1E4FA8' }}>5 个</Text>
+            <Text style={{ fontSize: 15, color: '#4A5568' }}>JSON 契约文件</Text>
+          </Box>
+          <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 8, padding: '12px 16px' }}>
+            <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1E4FA8' }}>全量</Text>
+            <Text style={{ fontSize: 15, color: '#4A5568' }}>写操作入审计日志</Text>
+          </Box>
+        </Box>
+        <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.6 }}>
+          用户确认后：读数 / 用药 / 任务完成 · 医生确认后：调分提案 / 审核意见 · 系统自动：预警落库 / 审计日志
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+  {/* 页脚 */}
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>迈康 MyCare · 老年慢病多智能体协同健康管理平台</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>13 / 15</Text>
+  </Box>
+</Slide>
